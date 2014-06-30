@@ -1,0 +1,26 @@
+{
+    "name": "opengovfoundation/uslm",
+    "type": "library",
+    "description": "Library for the United States Legislative Markup",
+    "keywords": ["USLM"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Birk",
+            "email": "cmbirk@gmail.com",
+            "homepage": "https://github.com/cmbirk"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "USLM\\": "src/"
+        },
+        "files": ["src/functions.php"]
+    },
+    "require-dev": {
+        "codeception/codeception": "*"
+    }
+}
