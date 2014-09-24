@@ -1,7 +1,5 @@
 <?php
 
-namespace USLM;
-
 /**
 * Better array dumping.  Borrowed from the Laravel Framework.
 */
