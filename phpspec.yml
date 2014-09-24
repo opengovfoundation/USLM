@@ -1,0 +1,4 @@
+suites:
+  suite:
+    namespace: USLM
+    formatter.name: pretty
