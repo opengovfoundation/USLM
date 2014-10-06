@@ -12,6 +12,6 @@ matrix:
 notifications:
   irc: 
     channels:
-      - "chat.freenode.net#opengov-private"
+      - "irc.freenode.net#opengov-private"
     on_success: change
     on_failure: always
