@@ -11,8 +11,4 @@ class SenateBillSpec extends ObjectBehavior
     {
       $this->shouldHaveType('USLM\Legislation\SenateBill');
     }
-
-    function its_constants_are_defined(){
-      SenateBill::TYPE_NAME->shouldBe('Senate Bill');
-    }
 }

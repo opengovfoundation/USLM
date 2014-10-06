@@ -1,0 +1,17 @@
+language: php
+php:
+  - 5.5
+  - 5.4
+  - hhvm
+install:
+  - composer install
+script:
+  - vendor/bin/phpspec run
+matrix:
+  fast_finish: true
+notifications:
+  irc: 
+    channels:
+      - "chat.freenode.net#opengov-private"
+    on_success: change
+    on_failure: always
