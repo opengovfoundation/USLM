@@ -20,7 +20,7 @@
 
 *This list is not exhaustive, but lists important elements / attributes from the official [DTD](http://www.gpo.gov/fdsys/bulkdata/BILLS/resources/bill.dtd)*
 
-##### Heirarchy
+##### Heirarchy **in progress**
 
 *Many optional entities do not appear below*
 
