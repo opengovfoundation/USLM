@@ -1,6 +1,6 @@
 <?php 
 
-namespace Import\Exceptions;
+namespace USLM\Exceptions;
 
 class IncorrectArgumentCountException extends \Exception {
 
