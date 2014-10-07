@@ -2,6 +2,51 @@
 
 ## Legislation
 
+### Status
+
+This library can currently grab the following from a House Bill (HR):
+
+**DMS Id**
+> getDMSId()
+
+> ex: H7601F8A0A016467483629C41354A77B9
+
+**Bill Stage**
+> getBillStage()
+
+> ex: Engrossed-in-House
+
+**Congress**
+> getCongress()
+
+> ex: 113th CONGRESS
+
+**Session**
+> getSession()
+
+> ex: 2d Session
+
+**Legis Num**
+> getLegisNum()
+
+> ex: H. R. 10
+
+**Current Chamber**
+> getCurrentChamber()
+
+> ex: IN THE HOUSE OF REPRESENTATIVES
+
+**Legis Type**
+> getLegisType()
+
+> ex: AN ACT
+
+**Official Title**
+> getOfficialTitle()
+
+> ex: To amend the charter school program under the Elementary and Secondary Education Act of 1965.
+
+
 ### Types
 
 * Bills
