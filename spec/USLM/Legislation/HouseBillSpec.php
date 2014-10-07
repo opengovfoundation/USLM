@@ -19,6 +19,14 @@ class HouseBillSpec extends ObjectBehavior
     $this->loadXML($raw)->shouldReturn(true);
   }
 
+  function it_should_get_the_dms_id() {
+    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
+
+    $this->loadXML($raw);
+
+    $this->getDMSId()->shouldReturn('H7601F8A0A016467483629C41354A77B9');
+  }
+
   function it_should_get_the_body(){
     $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
 

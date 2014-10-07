@@ -30,6 +30,7 @@ class HouseBill extends Legislation{
   *   There can potentially be more than one
   *
   * @todo Account for more than one body node
+  * @return SimpleXMLElement
   */
   public function getBody()
   {
@@ -46,6 +47,7 @@ class HouseBill extends Legislation{
 
   /**
   * Grab the form node
+  * @return SimpleXMLElement
   */
   public function getForm()
   {
@@ -60,6 +62,11 @@ class HouseBill extends Legislation{
     return $formNodes[0];
   }
 
+  /**
+  * Grab the bill stage
+  *
+  * @return String
+  */
   public function getBillStage()
   {
     $this->checkRequirements(array('simplexml'));
@@ -67,11 +74,26 @@ class HouseBill extends Legislation{
     return (string)$this->simplexml->attributes()['bill-stage'];
   }
 
+  /**
+  * Helper method to verify an array of necessary attributes
+  *   If any of the attributes don't exist, throw an exception
+  */
   private function checkRequirements($attributes){
     foreach($attributes as $attribute){
       if(!isset($this->$attribute)){
         throw new AttributeNotFoundException("$attribute is not defined.");
       }
     }
+  }
+
+  /**
+  * Grab the DMS Id
+  *   Note:  I think this is a unique identifier that would be the same across versions of the same bill
+  */
+  public function getDMSId()
+  {
+      $this->checkRequirements(array('simplexml'));
+
+      return (string)$this->simplexml->attributes()['dms-id'];
   }
 }
