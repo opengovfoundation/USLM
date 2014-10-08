@@ -6,6 +6,8 @@ namespace USLM\Legislation;
 
 use USLM\Exceptions\IncorrectXMLFormatException;
 
+use USLM\Legislation\Element\Action\Action;
+
 class HouseBill extends Legislation{
   const TYPE_NAME = "House Bill";
   const TYPE_CODE = "HR";
@@ -72,18 +74,6 @@ class HouseBill extends Legislation{
     $this->checkRequirements(array('simplexml'));
     
     return (string)$this->simplexml->attributes()['bill-stage'];
-  }
-
-  /**
-  * Helper method to verify an array of necessary attributes
-  *   If any of the attributes don't exist, throw an exception
-  */
-  private function checkRequirements($attributes){
-    foreach($attributes as $attribute){
-      if(!isset($this->$attribute)){
-        throw new AttributeNotFoundException("$attribute is not defined.");
-      }
-    }
   }
 
   /**
@@ -203,5 +193,28 @@ class HouseBill extends Legislation{
       }
 
       return (string)$nodes[0];
+  }
+
+  /**
+  * Grab all action dates
+  *
+  * @return false if no action dates found or array of action dates
+  */
+  public function getActions()
+  {
+    $this->checkRequirements(array('simplexml'));
+
+    $actions = $this->simplexml->xpath('/bill/form/action');
+    
+    $returned = array();
+
+    foreach($actions as $action){
+      $object = new Action();
+      $object->simplexml($action);
+
+      array_push($returned, $object->toArray());
+    }
+
+    return $returned;
   }
 }

@@ -3,8 +3,9 @@
 * Abstract Legislation Class
 */
 namespace USLM\Legislation;
+use USLM\Element;
 
-abstract class Legislation{
+abstract class Legislation extends Element{
 
   function __construct() {
     if (!defined('static::TYPE_NAME') || !defined('static::TYPE_CODE')){

@@ -89,4 +89,53 @@ class HouseBillSpec extends ObjectBehavior
 
     $this->getOfficialTitle()->shouldBeEqualTo('To amend the charter school program under the Elementary and Secondary Education Act of 1965.');
   }
+
+  function it_should_return_array_of_actions_if_exist() {
+    $raw = file_get_contents(__DIR__ . '/../../data/valid2.xml');
+    $this->loadXML($raw);
+
+    $expected = array(
+      array(
+        'action-date' => 'March 12, 2013',
+        'action-desc' => array(
+          'text'  => 'Mr. Lamborn introduced the following bill; which was referred to the Committee on Natural Resources',
+          'sponsor' => 'Mr. Lamborn',
+          'committee-name'  => 'Committee on Natural Resources'
+        )
+      ),
+      array(
+        'action-date' => 'April 1, 2014',
+        'action-desc' => array(
+          'text'  => 'Additional sponsors: Mr. Cole, Mr. Diaz-Balart, Mr. Cramer, Mr. Coffman, Mr. Amodei, Mrs. Lummis, Mr. Stivers, Mr. Mullin, and Mr. Ross',
+          'cosponsor' => array(
+            'Mr. Cole',
+            'Mr. Diaz-Balart',
+            'Mr. Cramer',
+            'Mr. Coffman',
+            'Mr. Amodei',
+            'Mrs. Lummis',
+            'Mr. Stivers',
+            'Mr. Mullin',
+            'Mr. Ross'
+          )
+        )
+      ),
+      array(
+        'action-date' => 'April 1, 2014',
+        'action-desc' => array(
+          'text'  => 'Committed to the Committee of the Whole House on the State of the Union and ordered to be printed'
+        )
+      )
+    );
+
+    $this->getActions()->shouldBe($expected);
+  }
+
+  function it_should_return_empty_array_if_no_actions() {
+    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
+    $this->loadXML($raw);
+
+    $this->getActions()->shouldBe(array());
+  }
+
 }

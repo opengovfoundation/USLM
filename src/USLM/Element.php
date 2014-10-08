@@ -2,12 +2,14 @@
 
 namespace USLM;
 
+use USLM\Exceptions\AttributeNotFoundException;
+
 class Element{
 
 	public $parent;
 	public $xml;
 
-	protected function __construct(){
+	public function __construct(){
 
 	}
 
@@ -40,4 +42,16 @@ class Element{
 			$this->$attribute = $value;
 		}
 	}
+
+	/**
+  * Helper method to verify an array of necessary attributes
+  *   If any of the attributes don't exist, throw an exception
+  */
+  protected function checkRequirements($attributes){
+    foreach($attributes as $attribute){
+      if(!isset($this->$attribute)){
+        throw new AttributeNotFoundException("$attribute is not defined on " . get_class($this));
+      }
+    }
+  }
 }
