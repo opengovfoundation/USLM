@@ -14,85 +14,62 @@ class HouseBillSpec extends ObjectBehavior
   }
 
   function it_should_load_the_xml() {
-    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
-
+    $raw = $this->raw1();
     $this->loadXML($raw)->shouldReturn(true);
   }
 
   function it_should_get_the_dms_id() {
-    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
-    $this->loadXML($raw);
-
+    $this->loadRaw('raw1');
     $this->getDMSId()->shouldReturn('H7601F8A0A016467483629C41354A77B9');
   }
 
   function it_should_get_the_body(){
-    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
-    $this->loadXML($raw);
-
+    $this->loadRaw('raw1');
     $this->getBody()->shouldReturnAnInstanceOf('SimpleXMLElement');
   }
 
   function it_should_get_the_form(){
-    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
-    $this->loadXML($raw);
-
+    $this->loadRaw('raw1');
     $this->getForm()->shouldReturnAnInstanceOf('SimpleXMLElement');
   }
 
   function it_should_get_the_bill_stage(){
-    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
-    $this->loadXML($raw);
-
+    $this->loadRaw('raw1');
     $this->getBillStage()->shouldBeEqualTo('Engrossed-in-House');
   }
 
   function it_should_get_the_congress(){
-    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
-    $this->loadXML($raw);
-
+    $this->loadRaw('raw1');
     $this->getCongress()->shouldBeEqualTo('113th CONGRESS');
   }
 
   function it_should_get_the_session(){
-    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
-    $this->loadXML($raw);
-
+    $this->loadRaw('raw1');
     $this->getSession()->shouldBeEqualTo('2d Session');
-
   }
 
   function it_should_get_the_legis_num(){
-    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
-    $this->loadXML($raw);
-
+    $this->loadRaw('raw1');
     $this->getLegisNum()->shouldBeEqualTo('H. R. 10');
   }
 
   function it_should_get_the_current_chamber(){
-    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
-    $this->loadXML($raw);
-
+    $this->loadRaw('raw1');
     $this->getCurrentChamber()->shouldBeEqualTo('IN THE HOUSE OF REPRESENTATIVES');
   }
 
   function it_should_get_the_legis_type(){
-    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
-    $this->loadXML($raw);
-
+    $this->loadRaw('raw1');
     $this->getLegisType()->shouldBeEqualTo('AN ACT');
   }
 
   function it_should_get_the_official_title(){
-    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
-    $this->loadXML($raw);
-
+    $this->loadRaw('raw1');
     $this->getOfficialTitle()->shouldBeEqualTo('To amend the charter school program under the Elementary and Secondary Education Act of 1965.');
   }
 
   function it_should_return_array_of_actions_if_exist() {
-    $raw = file_get_contents(__DIR__ . '/../../data/valid2.xml');
-    $this->loadXML($raw);
+    $this->loadRaw('raw2');
 
     $expected = array(
       array(
@@ -132,10 +109,20 @@ class HouseBillSpec extends ObjectBehavior
   }
 
   function it_should_return_empty_array_if_no_actions() {
-    $raw = file_get_contents(__DIR__ . '/../../data/valid1.xml');
-    $this->loadXML($raw);
-
+    $this->loadRaw('raw1');
     $this->getActions()->shouldBe(array());
   }
 
+  protected function raw1(){
+    return file_get_contents(__DIR__ . '/../../data/valid1.xml');
+  }
+
+  protected function raw2(){
+    return file_get_contents(__DIR__ . '/../../data/valid2.xml');
+  }
+
+  protected function loadRaw(String $call){
+    $raw = $this->$call();
+    $this->loadXML($raw);
+  }
 }
