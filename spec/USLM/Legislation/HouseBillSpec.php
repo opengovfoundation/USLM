@@ -76,7 +76,10 @@ class HouseBillSpec extends ObjectBehavior
         'action-date' => 'March 12, 2013',
         'action-desc' => array(
           'text'  => 'Mr. Lamborn introduced the following bill; which was referred to the Committee on Natural Resources',
-          'sponsor' => 'Mr. Lamborn',
+          'sponsor' => array(
+            'name-id' => 'L000564',
+            'name' => 'Mr. Lamborn'
+          ),
           'committee-name'  => 'Committee on Natural Resources'
         )
       ),
@@ -84,16 +87,43 @@ class HouseBillSpec extends ObjectBehavior
         'action-date' => 'April 1, 2014',
         'action-desc' => array(
           'text'  => 'Additional sponsors: Mr. Cole, Mr. Diaz-Balart, Mr. Cramer, Mr. Coffman, Mr. Amodei, Mrs. Lummis, Mr. Stivers, Mr. Mullin, and Mr. Ross',
-          'cosponsor' => array(
-            'Mr. Cole',
-            'Mr. Diaz-Balart',
-            'Mr. Cramer',
-            'Mr. Coffman',
-            'Mr. Amodei',
-            'Mrs. Lummis',
-            'Mr. Stivers',
-            'Mr. Mullin',
-            'Mr. Ross'
+          'cosponsors' => array(
+            array(
+              'name-id' => 'C001053',
+              'name'  => 'Mr. Cole'
+            ),
+            array(
+              'name-id' => 'D000600',
+              'name'  => 'Mr. Diaz-Balart'
+            ),
+            array(
+              'name-id' => 'C001096',
+              'name'  => 'Mr. Cramer'
+            ),
+            array(
+              'name-id' => 'C001077',
+              'name'  => 'Mr. Coffman'
+            ),
+            array(
+              'name-id' => 'A000369',
+              'name'  => 'Mr. Amodei'
+            ),
+            array(
+              'name-id' => 'L000571',
+              'name'  => 'Mrs. Lummis'
+            ),
+            array(
+              'name-id' => 'S001187',
+              'name'  => 'Mr. Stivers'
+            ),
+            array(
+              'name-id' => 'M001190',
+              'name'  => 'Mr. Mullin'
+            ),
+            array(
+              'name-id' => 'R000593',
+              'name'  => 'Mr. Ross'
+            )
           )
         )
       ),
@@ -111,6 +141,62 @@ class HouseBillSpec extends ObjectBehavior
   function it_should_return_empty_array_if_no_actions() {
     $this->loadRaw('raw1');
     $this->getActions()->shouldBe(array());
+  }
+
+  function it_should_return_the_sponsor() {
+    $this->loadRaw('raw2');
+
+    $expected = array(
+      'name-id' => 'L000564',
+      'name'  => 'Mr. Lamborn'
+    );
+
+    $this->getSponsor()->shouldBe($expected);
+  }
+
+  function it_should_return_the_cosponsors() {
+    $this->loadRaw('raw2');
+
+    $expected = array(
+      array(
+        'name-id' => 'C001053',
+        'name'  => 'Mr. Cole'
+      ),
+      array(
+        'name-id' => 'D000600',
+        'name'  => 'Mr. Diaz-Balart'
+      ),
+      array(
+        'name-id' => 'C001096',
+        'name'  => 'Mr. Cramer'
+      ),
+      array(
+        'name-id' => 'C001077',
+        'name'  => 'Mr. Coffman'
+      ),
+      array(
+        'name-id' => 'A000369',
+        'name'  => 'Mr. Amodei'
+      ),
+      array(
+        'name-id' => 'L000571',
+        'name'  => 'Mrs. Lummis'
+      ),
+      array(
+        'name-id' => 'S001187',
+        'name'  => 'Mr. Stivers'
+      ),
+      array(
+        'name-id' => 'M001190',
+        'name'  => 'Mr. Mullin'
+      ),
+      array(
+        'name-id' => 'R000593',
+        'name'  => 'Mr. Ross'
+      )
+    );
+
+    $this->getCosponsors()->shouldBe($expected);
   }
 
   protected function raw1(){

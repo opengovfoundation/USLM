@@ -23,25 +23,15 @@ class ActionDesc extends LegislationElement{
     $array['text'] = strip_tags($this->xml->asXML());
 
     if($sponsor = $this->getSponsor()){
-      $array['sponsor'] = (string)$sponsor;
+      $array['sponsor'] = $sponsor;
     }
 
     if($committeeName = $this->getCommittee()){
       $array['committee-name'] = (string)$committeeName;
     }
 
-    if($cosponsor = $this->getCosponsor()){
-      if(is_array($cosponsor)){
-        $cosponsors = array();
-
-        foreach($cosponsor as $object){
-          array_push($cosponsors, (string)$object);
-        }
-
-        $array['cosponsor'] = $cosponsors;
-      }else{
-        $array['cosponsor'] = (string)$cosponsor;
-      }
+    if($cosponsors = $this->getCosponsors()){
+      $array['cosponsors'] = $cosponsors;
     }
 
     return $array;
@@ -55,7 +45,7 @@ class ActionDesc extends LegislationElement{
     $sponsor = new Sponsor();
     $sponsor->simplexml($this->xml->sponsor);
 
-    return $sponsor;
+    return $sponsor->toArray();
   }
 
   public function getCommittee(){
@@ -69,26 +59,22 @@ class ActionDesc extends LegislationElement{
     return $committeeName;
   }
 
-  public function getCosponsor(){
+  public function getCosponsors(){
     if(!isset($this->xml->cosponsor)){
       return false;
     }
 
-    $element = $this->xml->cosponsor;
+    $nodes = $this->xml->cosponsor;
 
-    if($element->count() === 1){
+    $array = array();
+
+    foreach($nodes as $node){
       $cosponsor = new Cosponsor();
-      $cosponsor->simplexml($element);
-    } else {
-      $cosponsor = array();
-      
-      foreach($element as $object){
-        $toAdd = new Cosponsor();
-        $toAdd->simplexml($object);
-        array_push($cosponsor, $toAdd);
-      }
+      $cosponsor->simplexml($node);
+
+      array_push($array, $cosponsor->toArray());
     }
-    
-    return $cosponsor;
+
+    return $array;
   }
 }

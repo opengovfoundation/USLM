@@ -7,6 +7,8 @@ namespace USLM\Legislation;
 use USLM\Exceptions\IncorrectXMLFormatException;
 
 use USLM\Legislation\Element\Action\Action;
+use USLM\Legislation\Element\Action\Sponsor;
+use USLM\Legislation\Element\Action\Cosponsor;
 
 class HouseBill extends Legislation{
   const TYPE_NAME = "House Bill";
@@ -189,7 +191,7 @@ class HouseBill extends Legislation{
       $nodes = $this->simplexml->xpath('/bill/form/official-title');
 
       if(count($nodes) !== 1){
-        throw new IncorrectXMLFormatException("Official-title node count (" . $count($nodes) . ") does not equal 1.");
+        throw new IncorrectXMLFormatException("Official-title node count (" . count($nodes) . ") does not equal 1.");
       }
 
       return (string)$nodes[0];
@@ -216,5 +218,50 @@ class HouseBill extends Legislation{
     }
 
     return $returned;
+  }
+
+  /**
+  * Grab the sponsor
+  *   Assumes only one sponsor possible
+  *
+  * @return Array
+  */
+  public function getSponsor()
+  {
+    $this->checkRequirements(array('simplexml'));
+
+    $nodes = $this->simplexml->xpath('/bill/form/action/action-desc/sponsor');
+
+    if(count($nodes) !== 1){
+      throw new IncorrectXMLFormatException("Sponsor node count (" . count($nodes) . ") does not equal 1.");
+    }
+
+    $sponsor = new Sponsor();
+    $sponsor->simplexml($nodes[0]);
+
+    return $sponsor->toArray();
+  }
+
+  /**
+  * Grab the cosponsors
+  *
+  * @return Array
+  */
+  public function getCosponsors()
+  {
+      $this->checkRequirements(array('simplexml'));
+
+      $nodes = $this->simplexml->xpath('/bill/form/action/action-desc/cosponsor');
+
+      $array = array();
+
+      foreach($nodes as $node){
+        $cosponsor = new Cosponsor();
+        $cosponsor->simplexml($node);
+
+        array_push($array, $cosponsor->toArray());
+      }
+
+      return $array;
   }
 }

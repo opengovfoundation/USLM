@@ -21,4 +21,19 @@ class SponsorSpec extends ObjectBehavior
 
       $this->__toString()->shouldBe('Mr. Lamborn');
     }
+
+    function it_returns_the_correct_array() {
+      $raw = '<sponsor name-id="L000564">Mr. Lamborn</sponsor>';
+
+      $simplexml = simplexml_load_string($raw);
+
+      $this->simplexml($simplexml);
+
+      $expected = array(
+        'name-id' => 'L000564',
+        'name'    => 'Mr. Lamborn'
+      );
+
+      $this->toArray()->shouldBe($expected);      
+    }
 }
