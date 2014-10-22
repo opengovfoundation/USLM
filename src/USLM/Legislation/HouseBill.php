@@ -27,13 +27,13 @@ class HouseBill extends Legislation{
   {
     $this->checkRequirements(array('xml'));
     
-    $bodyNodes = $this->xml->xpath(self::TYPE_BODY);
+    $nodes = $this->xml->xpath(self::TYPE_BODY);
 
-    if(!isset($bodyNodes[0])){
+    if(!isset($nodes[0])){
       throw new IncorrectXMLFormatException("Body node index 0 not found.");
     }
 
-    return $bodyNodes[0];
+    return $nodes[0];
   }
 
   /**

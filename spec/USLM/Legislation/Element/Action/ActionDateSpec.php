@@ -18,6 +18,6 @@ class ActionDateSpec extends ObjectBehavior
       $simplexml = simplexml_load_string($raw);
       $this->simplexml($simplexml);
 
-      $this->toString()->shouldBe('March 12, 2013');
+      $this->__toString()->shouldBe('March 12, 2013');
     }
 }

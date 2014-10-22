@@ -70,77 +70,12 @@ class HouseBillSpec extends ObjectBehavior
 
   function it_should_return_array_of_actions_if_exist() {
     $this->loadRaw('raw2');
-
-    $expected = array(
-      array(
-        'action-date' => 'March 12, 2013',
-        'action-desc' => array(
-          'text'  => 'Mr. Lamborn introduced the following bill; which was referred to the Committee on Natural Resources',
-          'sponsor' => array(
-            'name-id' => 'L000564',
-            'name' => 'Mr. Lamborn'
-          ),
-          'committee-name'  => 'Committee on Natural Resources'
-        )
-      ),
-      array(
-        'action-date' => 'April 1, 2014',
-        'action-desc' => array(
-          'text'  => 'Additional sponsors: Mr. Cole, Mr. Diaz-Balart, Mr. Cramer, Mr. Coffman, Mr. Amodei, Mrs. Lummis, Mr. Stivers, Mr. Mullin, and Mr. Ross',
-          'cosponsors' => array(
-            array(
-              'name-id' => 'C001053',
-              'name'  => 'Mr. Cole'
-            ),
-            array(
-              'name-id' => 'D000600',
-              'name'  => 'Mr. Diaz-Balart'
-            ),
-            array(
-              'name-id' => 'C001096',
-              'name'  => 'Mr. Cramer'
-            ),
-            array(
-              'name-id' => 'C001077',
-              'name'  => 'Mr. Coffman'
-            ),
-            array(
-              'name-id' => 'A000369',
-              'name'  => 'Mr. Amodei'
-            ),
-            array(
-              'name-id' => 'L000571',
-              'name'  => 'Mrs. Lummis'
-            ),
-            array(
-              'name-id' => 'S001187',
-              'name'  => 'Mr. Stivers'
-            ),
-            array(
-              'name-id' => 'M001190',
-              'name'  => 'Mr. Mullin'
-            ),
-            array(
-              'name-id' => 'R000593',
-              'name'  => 'Mr. Ross'
-            )
-          )
-        )
-      ),
-      array(
-        'action-date' => 'April 1, 2014',
-        'action-desc' => array(
-          'text'  => 'Committed to the Committee of the Whole House on the State of the Union and ordered to be printed'
-        )
-      )
-    );
-
-    $this->getActions()->shouldBe($expected);
+    $this->getActions()->shouldHaveCount(3);
   }
 
   function it_should_return_empty_array_if_no_actions() {
     $this->loadRaw('raw1');
-    $this->getActions()->shouldBe(array());
+    $this->getActions()->shouldHaveCount(0);
   }
 
   function it_should_return_the_sponsor() {

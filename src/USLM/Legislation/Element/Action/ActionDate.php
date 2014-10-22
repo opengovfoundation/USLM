@@ -12,7 +12,7 @@ use USLM\Legislation\Element\LegislationElement;
 
 class ActionDate extends LegislationElement{
 
-  public function toString(){
+  public function __toString(){
     $this->checkRequirements(array('xml'));
 
     return (string)$this->xml;

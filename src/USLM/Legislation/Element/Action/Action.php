@@ -17,33 +17,28 @@ use USLM\Legislation\Element\LegislationElement;
 class Action extends LegislationElement{
 
   public function toArray(){
-    $this->parseElement();
-
     $array = array();
-    $array['action-date'] = $this->actionDate->toString();
-    $array['action-desc'] = $this->actionDesc->toArray();
+    $array['action-date'] = $this->getActionDate();
+    $array['action-desc'] = $this->getActionDesc();
 
     return $array;
   }
 
-  public function parseElement(){
+  public function getActionDate() {
     $this->checkRequirements(array('xml'));
 
-    $this->actionDate = $this->setActionDate();
-    $this->actionDesc = $this->setActionDesc();
-  }
-
-  public function setActionDate(){
     $actionDate = new ActionDate();
     $actionDate->simplexml($this->xml->{'action-date'});
-    
-    return $actionDate;
+
+    return (string)$actionDate;
   }
 
-  public function setActionDesc(){
+  public function getActionDesc() {
+    $this->checkRequirements(array('xml'));
+
     $actionDesc = new ActionDesc();
     $actionDesc->simplexml($this->xml->{'action-desc'});
 
-    return $actionDesc;
+    return $actionDesc->toArray();
   }
 }
