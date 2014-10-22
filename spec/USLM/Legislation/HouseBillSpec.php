@@ -134,6 +134,11 @@ class HouseBillSpec extends ObjectBehavior
     $this->getCosponsors()->shouldBe($expected);
   }
 
+  public function it_should_return_the_committees() {
+    $this->loadRaw('raw2');
+    $this->getCommittees()->shouldHaveCount(1);
+  }
+
   protected function raw1(){
     return file_get_contents(__DIR__ . '/../../data/valid1.xml');
   }

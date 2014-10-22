@@ -9,6 +9,7 @@ use USLM\Exceptions\IncorrectXMLFormatException;
 use USLM\Legislation\Element\Action\Action;
 use USLM\Legislation\Element\Action\Sponsor;
 use USLM\Legislation\Element\Action\Cosponsor;
+use USLM\Legislation\Element\Action\Committee;
 
 class HouseBill extends Legislation{
   const TYPE_NAME = "House Bill";
@@ -252,11 +253,40 @@ class HouseBill extends Legislation{
       return $array;
   }
 
+  /**
+  * Load raw XML and create simplexml element
+  *
+  * @return Bool true
+  */
   public function loadXML($raw)
   {
       $simplexml = simplexml_load_string($raw);
       $this->simplexml($simplexml);
 
       return true;
+  }
+
+  /**
+  * Grab the committees
+  *
+  * @return Array
+  * @todo Currently only pulls from ActionDesc
+  */
+  public function getCommittees()
+  {
+    $this->checkRequirements(array('xml'));
+
+    $nodes = $this->xml->xpath('/bill/form/action/action-desc/committee-name');
+
+    $array = array();
+
+    foreach($nodes as $node) {
+      $committee = new Committee();
+      $committee->simplexml($node);
+
+      array_push($array, $committee->toArray());
+    }
+
+    return $array;
   }
 }
