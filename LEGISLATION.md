@@ -46,6 +46,26 @@ This library can currently grab the following from a House Bill (HR):
 
 > ex: To amend the charter school program under the Elementary and Secondary Education Act of 1965.
 
+**Actions**
+> getActions()
+
+> returns array of action arrays
+
+**Sponsor**
+> getSponsor()
+
+> returns sponsor array with keys 'name-id' and 'name'
+
+**Cosponsors**
+> getCosponsors()
+
+> returns array of cosponsor arrays each having keys 'name-id' and 'name'
+
+
+**Committees**
+> getCommittees()
+
+> returns array of committee arrays each having keys 'committee-id' and 'committee-name'
 
 ### Types
 
