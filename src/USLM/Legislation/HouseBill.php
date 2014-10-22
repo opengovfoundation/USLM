@@ -16,19 +16,6 @@ class HouseBill extends Legislation{
   const TYPE_BODY = "legis-body";
   const TYPE_FORM = "form";
 
-  public function loadXML($raw)
-  {
-    $this->raw = $raw;
-
-    try{
-      $this->simplexml = simplexml_load_string($this->raw);
-    }catch(Exception $e){
-      throw new IncorrectXMLFormatException($e->getMessage());
-    }
-
-    return true;
-  }
-
   /**
   * Grab the array of body nodes
   *   There can potentially be more than one
@@ -38,9 +25,9 @@ class HouseBill extends Legislation{
   */
   public function getBody()
   {
-    $this->checkRequirements(array('simplexml'));
+    $this->checkRequirements(array('xml'));
     
-    $bodyNodes = $this->simplexml->xpath(self::TYPE_BODY);
+    $bodyNodes = $this->xml->xpath(self::TYPE_BODY);
 
     if(!isset($bodyNodes[0])){
       throw new IncorrectXMLFormatException("Body node index 0 not found.");
@@ -55,9 +42,9 @@ class HouseBill extends Legislation{
   */
   public function getForm()
   {
-    $this->checkRequirements(array('simplexml'));
+    $this->checkRequirements(array('xml'));
     
-    $formNodes = $this->simplexml->xpath(self::TYPE_FORM);
+    $formNodes = $this->xml->xpath(self::TYPE_FORM);
 
     if(count($formNodes) !== 1){
       throw new IncorrectXMLFormatException("Form node count (" . count($formNodes) . ") does not equal 1.");
@@ -73,9 +60,9 @@ class HouseBill extends Legislation{
   */
   public function getBillStage()
   {
-    $this->checkRequirements(array('simplexml'));
+    $this->checkRequirements(array('xml'));
     
-    return (string)$this->simplexml->attributes()['bill-stage'];
+    return (string)$this->xml->attributes()['bill-stage'];
   }
 
   /**
@@ -84,9 +71,9 @@ class HouseBill extends Legislation{
   */
   public function getDMSId()
   {
-      $this->checkRequirements(array('simplexml'));
+      $this->checkRequirements(array('xml'));
 
-      return (string)$this->simplexml->attributes()['dms-id'];
+      return (string)$this->xml->attributes()['dms-id'];
   }
 
   /**
@@ -96,9 +83,9 @@ class HouseBill extends Legislation{
   */
   public function getCongress()
   {
-      $this->checkRequirements(array('simplexml'));
+      $this->checkRequirements(array('xml'));
 
-      $nodes = $this->simplexml->xpath('/bill/form/congress');
+      $nodes = $this->xml->xpath('/bill/form/congress');
 
       if(count($nodes) !== 1){
         throw new IncorrectXMLFormatException("Congress node count (" . count($nodes) . ") does not equal 1.");
@@ -114,9 +101,9 @@ class HouseBill extends Legislation{
   */
   public function getSession()
   {
-      $this->checkRequirements(array('simplexml'));
+      $this->checkRequirements(array('xml'));
 
-      $nodes = $this->simplexml->xpath('/bill/form/session');
+      $nodes = $this->xml->xpath('/bill/form/session');
 
       if(count($nodes) !== 1){
         throw new IncorrectXMLFormatException("Session node count(" . count($nodes) . ") does not equal 1.");
@@ -132,9 +119,9 @@ class HouseBill extends Legislation{
   */
   public function getLegisNum()
   {
-      $this->checkRequirements(array('simplexml'));
+      $this->checkRequirements(array('xml'));
 
-      $nodes = $this->simplexml->xpath('/bill/form/legis-num');
+      $nodes = $this->xml->xpath('/bill/form/legis-num');
 
       if(count($nodes) !== 1){
         throw new IncorrectXMLFormatException("Legis-num node count (" . count($nodes) . ") does not equal 1.");
@@ -150,9 +137,9 @@ class HouseBill extends Legislation{
   */
   public function getCurrentChamber()
   {
-      $this->checkRequirements(array('simplexml'));
+      $this->checkRequirements(array('xml'));
 
-      $nodes = $this->simplexml->xpath('/bill/form/current-chamber');
+      $nodes = $this->xml->xpath('/bill/form/current-chamber');
 
       if(count($nodes) !== 1){
         throw new IncorrectXMLFormatException("Current-chamber node count (" . $count($nodes) . ") does not equal 1.");
@@ -168,9 +155,9 @@ class HouseBill extends Legislation{
   */
   public function getLegisType()
   {
-      $this->checkRequirements(array('simplexml'));
+      $this->checkRequirements(array('xml'));
 
-      $nodes = $this->simplexml->xpath('/bill/form/legis-type');
+      $nodes = $this->xml->xpath('/bill/form/legis-type');
 
       if(count($nodes) !== 1){
         throw new IncorrectXMLFormatException("Legis-type node count (" . $count($nodes) . ") does not equal 1.");
@@ -186,9 +173,9 @@ class HouseBill extends Legislation{
   */
   public function getOfficialTitle()
   {
-      $this->checkRequirements(array('simplexml'));
+      $this->checkRequirements(array('xml'));
 
-      $nodes = $this->simplexml->xpath('/bill/form/official-title');
+      $nodes = $this->xml->xpath('/bill/form/official-title');
 
       if(count($nodes) !== 1){
         throw new IncorrectXMLFormatException("Official-title node count (" . count($nodes) . ") does not equal 1.");
@@ -204,9 +191,9 @@ class HouseBill extends Legislation{
   */
   public function getActions()
   {
-    $this->checkRequirements(array('simplexml'));
+    $this->checkRequirements(array('xml'));
 
-    $actions = $this->simplexml->xpath('/bill/form/action');
+    $actions = $this->xml->xpath('/bill/form/action');
     
     $returned = array();
 
@@ -228,9 +215,9 @@ class HouseBill extends Legislation{
   */
   public function getSponsor()
   {
-    $this->checkRequirements(array('simplexml'));
+    $this->checkRequirements(array('xml'));
 
-    $nodes = $this->simplexml->xpath('/bill/form/action/action-desc/sponsor');
+    $nodes = $this->xml->xpath('/bill/form/action/action-desc/sponsor');
 
     if(count($nodes) !== 1){
       throw new IncorrectXMLFormatException("Sponsor node count (" . count($nodes) . ") does not equal 1.");
@@ -249,9 +236,9 @@ class HouseBill extends Legislation{
   */
   public function getCosponsors()
   {
-      $this->checkRequirements(array('simplexml'));
+      $this->checkRequirements(array('xml'));
 
-      $nodes = $this->simplexml->xpath('/bill/form/action/action-desc/cosponsor');
+      $nodes = $this->xml->xpath('/bill/form/action/action-desc/cosponsor');
 
       $array = array();
 
@@ -263,5 +250,13 @@ class HouseBill extends Legislation{
       }
 
       return $array;
+  }
+
+  public function loadXML($raw)
+  {
+      $simplexml = simplexml_load_string($raw);
+      $this->simplexml($simplexml);
+
+      return true;
   }
 }
