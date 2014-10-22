@@ -81,12 +81,13 @@ class HouseBillSpec extends ObjectBehavior
   function it_should_return_the_sponsor() {
     $this->loadRaw('raw2');
 
-    $expected = array(
-      'name-id' => 'L000564',
-      'name'  => 'Mr. Lamborn'
-    );
+    //The array should have keys 'name' and 'name-id' 
+    $this->getSponsor()->shouldHaveCount(2);
+  }
 
-    $this->getSponsor()->shouldBe($expected);
+  function it_should_accept_zero_sponsors() {
+    $this->loadRaw('raw1');
+    $this->getSponsor()->shouldHaveCount(0);
   }
 
   function it_should_return_the_cosponsors() {

@@ -220,14 +220,20 @@ class HouseBill extends Legislation{
 
     $nodes = $this->xml->xpath('/bill/form/action/action-desc/sponsor');
 
-    if(count($nodes) !== 1){
-      throw new IncorrectXMLFormatException("Sponsor node count (" . count($nodes) . ") does not equal 1.");
+    if(count($nodes) > 1){
+      throw new IncorrectXMLFormatException("Sponsor node count (" . count($nodes) . ") greater than 1.");
     }
 
-    $sponsor = new Sponsor();
-    $sponsor->simplexml($nodes[0]);
+    if(count($nodes) > 0){
+      $sponsor = new Sponsor();
+      $sponsor->simplexml($nodes[0]);
 
-    return $sponsor->toArray();
+      return $sponsor->toArray();
+    }else {
+      return array();
+    }
+
+    
   }
 
   /**
