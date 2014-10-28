@@ -11,6 +11,8 @@ use USLM\Legislation\Element\Action\Sponsor;
 use USLM\Legislation\Element\Action\Cosponsor;
 use USLM\Legislation\Element\Action\Committee;
 
+use USLM\Legislation\Element\LegisBody\LegisBody;
+
 class HouseBill extends Legislation{
   const TYPE_NAME = "House Bill";
   const TYPE_CODE = "HR";
@@ -294,5 +296,19 @@ class HouseBill extends Legislation{
     }
 
     return $array;
+  }
+
+  /**
+  * Grab the body as markdown
+  *
+  * @return String (Markdown)
+  */
+  public function getBodyAsMarkdown()
+  {
+    $this->checkRequirements(array('xml'));
+    $body = $this->getBody();
+
+    $legisBody = new LegisBody();
+    $legisBody->simplexml($body);
   }
 }
