@@ -140,12 +140,12 @@ class HouseBillSpec extends ObjectBehavior
     $this->getCommittees()->shouldHaveCount(1);
   }
 
-  // public function it_should_return_the_body_as_markdown() {
-  //   $this->loadRaw('raw2');
-  //   $md = file_get_contents(__DIR__ . '/../../data/body2.md');
+  public function it_should_return_the_body_as_markdown() {
+    $this->loadRaw('raw2');
+    $md = file_get_contents(__DIR__ . '/../../data/body2.md');
 
-  //   $this->getBodyAsMarkdown()->shouldBe($md);
-  // }
+    $this->getBodyAsMarkdown()->shouldBe($md);
+  }
 
   protected function raw1(){
     return file_get_contents(__DIR__ . '/../../data/valid1.xml');

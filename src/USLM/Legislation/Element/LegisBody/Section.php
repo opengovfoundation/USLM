@@ -2,6 +2,8 @@
 
 namespace USLM\Legislation\Element\LegisBody;
 
+use \Exception;
+
 class Section extends LegisBodyElement {
   
   /**
@@ -16,28 +18,58 @@ class Section extends LegisBodyElement {
   public function asMarkdown() {
     $this->checkRequirements(array('xml'));
 
-    //Grab the (somewhat) scalar elements
+    //Grab the scalar elements
     $enum = $this->xml->enum;
     $header = $this->xml->header;
 
     //Create markdown string
     $markdown = "";
     $markdown .= "* __" . "$enum $header" . "__";
-    
-    if($text = $this->xml->text){
-      $textElement = new Text();
-      $textElement->simplexml($text);
+  
+    $children = $this->xml->children();
 
-      $markdown .= "\n";
-      $markdown .= "  * ";
-      $markdown .= $textElement->asMarkdown();
+    foreach($children as $child){
+      switch($child->getName()){
+        case 'text':
+          $element = new Text();
+          $element->simplexml($child);
+
+          $markdown .= "\n";
+          $markdown .= "  * ";
+          $markdown .= $element->asMarkdown();  
+          break;
+        case 'quoted-block':
+          $element = new QuotedBlock();
+          $element->simplexml($child);
+
+          $markdown .= "\n" . $element->asMarkdown();
+          break;
+        case 'paragraph':
+          $element = new Paragraph();
+          $element->simplexml($child);
+
+          $markdown .= "\n" . $this->indentList($element->asMarkdown(), 2);
+          break;
+        case 'subsection':
+          $element = new Subsection();
+          $element->simplexml($child);
+
+          $markdown .= "\n" . $this->indentList($element->asMarkdown(), 2);
+          break;
+        case 'enum':
+        case 'header':
+          break;
+        default:
+          throw new Exception("Section -> (" . $child->getName() .") has not yet been implemented.");
+      }
+    }
+
+    if($text = $this->xml->text){
+      
     }
 
     if($quoted_block = $this->xml->{'quoted-block'}){
-      $element = new QuotedBlock();
-      $element->simplexml($quoted_block);
-
-      $markdown .= "\n" . $element->asMarkdown();
+      
     }
 
     return $markdown;

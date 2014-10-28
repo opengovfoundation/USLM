@@ -310,5 +310,7 @@ class HouseBill extends Legislation{
 
     $legisBody = new LegisBody();
     $legisBody->simplexml($body);
+
+    return $legisBody->asMarkdown();
   }
 }
