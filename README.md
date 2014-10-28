@@ -3,7 +3,8 @@ USLM
 
 [![Build Status](https://travis-ci.org/opengovfoundation/USLM.svg?branch=master)](https://travis-ci.org/opengovfoundation/USLM)
 
-Library for the United Stated Legislative Markup
+PHP Library for the United Stated Legislative Markup
+*Currently tested on 5.4 - 5.6 and HHVM*
 
 Check out the [Legislation Documentation](LEGISLATION.md)
 
