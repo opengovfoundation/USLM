@@ -62,7 +62,7 @@ class Paragraph extends LegisBodyElement {
         case 'text':
           break;
         default:
-          throw new Exception(get_class_name($this) . " -> " . $child->getName() . " has not yet been implemented.");
+          throw new Exception(get_class($this) . " -> " . $child->getName() . " has not yet been implemented.");
       }
     }
 
