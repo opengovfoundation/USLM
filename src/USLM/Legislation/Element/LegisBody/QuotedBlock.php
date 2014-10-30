@@ -26,6 +26,8 @@ class QuotedBlock extends LegisBodyElement {
           $element = new Section();
           $element->simplexml($child);
           break;
+        default:
+          throw new Exception(get_class_name($this) . ' -> ' . $child->getName() . ' has not yet been implemented.');
       }
 
       $childMarkdown = $element->asMarkdown();
