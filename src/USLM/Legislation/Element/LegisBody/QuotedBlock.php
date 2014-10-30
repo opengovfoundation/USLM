@@ -22,16 +22,17 @@ class QuotedBlock extends LegisBodyElement {
       switch($child->getName()){
         case 'paragraph':
           $element = new Paragraph();
-          $element->simplexml($child);
           break;
         case 'section':
           $element = new Section();
-          $element->simplexml($child);
           break;
+        case 'subsection':
+          $element = new Subsection();
         default:
           throw new Exception(get_class($this) . ' -> ' . $child->getName() . ' has not yet been implemented.');
       }
 
+      $element->simplexml($child);
       $childMarkdown = $element->asMarkdown();
       $childMarkdown = preg_replace('/^[\s\*]*/m', '', $childMarkdown);
       $childMarkdown = preg_replace('/^__([^\s]+)__/m', '$1', $childMarkdown);
