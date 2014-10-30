@@ -50,6 +50,11 @@ class Section extends LegisBodyElement {
 
           $markdown .= "\n" . $this->indentList($element->asMarkdown(), 2);
           break;
+        case 'toc':
+          $element = new TOC();
+          $element->simplexml($child);
+          $markdown .= "\n" . $element->asMarkdown();
+          break;
         case 'subsection':
           $element = new Subsection();
           $element->simplexml($child);
