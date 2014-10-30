@@ -24,8 +24,7 @@ class QuotedBlockSpec extends ObjectBehavior
 
       $expected = "";
       $expected .= "***\n";
-      $expected .= "5211.\n";
-      $expected .= "Authorization of appropriations\n";
+      $expected .= "5211. Authorization of appropriations\n";
       $expected .= "There are authorized to be appropriated to carry out this subpart $300,000,000 for fiscal year 2015 and each of the 5 succeeding fiscal years.\n";
       $expected .= "***\n";
       $expected .= ".";

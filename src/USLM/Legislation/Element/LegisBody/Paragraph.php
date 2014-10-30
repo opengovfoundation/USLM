@@ -40,6 +40,12 @@ class Paragraph extends LegisBodyElement {
 
     foreach($children as $child){
       switch($child->getName()){
+        case 'quoted-block':
+          $element = new QuotedBlock();
+          $element->simplexml($child);
+
+          $markdown .= "\n" . $element->asMarkdown();
+          break;
         case 'subparagraph':
           $element = new Subparagraph();
           $element->simplexml($child);
