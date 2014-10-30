@@ -35,4 +35,26 @@ class QuotedBlockSpec extends ObjectBehavior
 
       $this->asMarkdown()->shouldBe($expected);
     }
+
+    function it_should_handle_subsection_children() {
+      $raw = '<quoted-block style="OLC" id="H1B2EC132803F480F8841EEBBF9E46280" display-inline="no-display-inline">
+                <subsection id="H311CAB4BF827411384F96403E73208A3">
+                  <enum>(g)</enum>
+                  <header>Public Disclosure of LNG Export Destinations</header>
+                  <text display-inline="yes-display-inline">As a condition for approval of any authorization to export LNG, the Secretary of Energy shall require the applicant to publicly disclose the specific destination or destinations of any such authorized LNG exports.</text>
+                </subsection>
+                <after-quoted-block>.</after-quoted-block>
+              </quoted-block>';
+
+      $expected = "";
+      $expected .= "***\n";
+      $expected .= "(g) Public Disclosure of LNG Export Destinations\n";
+      $expected .= "As a condition for approval of any authorization to export LNG, the Secretary of Energy shall require the applicant to publicly disclose the specific destination or destinations of any such authorized LNG exports.\n";
+      $expected .= "***\n";
+      $expected .= ".";
+
+      $simplexml = simplexml_load_string($raw);
+      $this->simplexml($simplexml);
+      $this->asMarkdown()->shouldBe($expected);
+    }
 }

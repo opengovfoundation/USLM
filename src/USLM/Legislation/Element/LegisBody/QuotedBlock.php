@@ -28,6 +28,7 @@ class QuotedBlock extends LegisBodyElement {
           break;
         case 'subsection':
           $element = new Subsection();
+          break;
         default:
           throw new Exception(get_class($this) . ' -> ' . $child->getName() . ' has not yet been implemented.');
       }
