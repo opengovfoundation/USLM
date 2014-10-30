@@ -34,18 +34,22 @@ class QuotedBlock extends LegisBodyElement {
       }
 
       $element->simplexml($child);
-      $childMarkdown = $element->asMarkdown();
-      $childMarkdown = preg_replace('/^[\s\*]*/m', '', $childMarkdown);
-      $childMarkdown = preg_replace('/^__([^\s]+)__/m', '$1', $childMarkdown);
-      $childMarkdown = preg_replace('/^__(.*?)__$/m', '$1', $childMarkdown);
-      $markdown .= $childMarkdown;
+      $markdown .= $this->stripMarkdownStyling($element->asMarkdown());
     }
-    //$markdown .= preg_replace('/^\s+/m', '', trim(strip_tags($block->asXML())));
+    
     $markdown .= "\n***";
     
     if((bool)$after){
       $markdown .= "\n" . (string)$after;
     }
+
+    return $markdown;
+  }
+
+  public function stripMarkdownStyling($markdown) {
+    $markdown = preg_replace('/^[\s\*]*/m', '', $markdown);
+    $markdown = preg_replace('/^__([^\s]+)__/m', '$1', $markdown);
+    $markdown = preg_replace('/^__(.*?)__$/m', '$1', $markdown);
 
     return $markdown;
   }
