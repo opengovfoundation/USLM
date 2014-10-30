@@ -2,6 +2,8 @@
 
 namespace USLM\Legislation\Element\LegisBody;
 
+use \Exception;
+
 class QuotedBlock extends LegisBodyElement {
 
   public function asMarkdown() {
