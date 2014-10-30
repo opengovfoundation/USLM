@@ -60,7 +60,7 @@ class Section extends LegisBodyElement {
         case 'header':
           break;
         default:
-          throw new Exception(get_class_name($this) . " -> " . $child->getName() ." has not yet been implemented.");
+          throw new Exception(get_class($this) . " -> " . $child->getName() ." has not yet been implemented.");
       }
     }
 
