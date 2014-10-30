@@ -5,6 +5,8 @@
 */
 namespace USLM\Legislation\Element\LegisBody;
 
+use \Exception;
+
 class LegisBody extends LegisBodyElement{
 
   public function asMarkdown() {
