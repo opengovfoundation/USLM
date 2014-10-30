@@ -46,9 +46,20 @@ class QuotedBlock extends LegisBodyElement {
     return $markdown;
   }
 
+  /**
+  * stripMarkdownStyling
+  *   Remove styling from quoted block content.
+  *   Strips leading *, __, and lines wrapped in __[content]__
+  *
+  * @param String
+  * @return String
+  */
   public function stripMarkdownStyling($markdown) {
+    //Strip leading spaces, *, __
     $markdown = preg_replace('/^[\s\*]*/m', '', $markdown);
     $markdown = preg_replace('/^__([^\s]+)__/m', '$1', $markdown);
+
+    //Remove bold styling wrapping lines
     $markdown = preg_replace('/^__(.*?)__$/m', '$1', $markdown);
 
     return $markdown;
