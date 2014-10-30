@@ -60,16 +60,8 @@ class Section extends LegisBodyElement {
         case 'header':
           break;
         default:
-          throw new Exception("Section -> (" . $child->getName() .") has not yet been implemented.");
+          throw new Exception(get_class_name($this) . " -> " . $child->getName() ." has not yet been implemented.");
       }
-    }
-
-    if($text = $this->xml->text){
-      
-    }
-
-    if($quoted_block = $this->xml->{'quoted-block'}){
-      
     }
 
     return $markdown;
