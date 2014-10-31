@@ -77,4 +77,30 @@ class QuotedBlockSpec extends ObjectBehavior
       $this->simplexml($simplexml);
       $this->asMarkdown()->shouldBe($expected);
     }
+
+    function it_should_handle_clause_children() {
+      $raw = '<quoted-block display-inline="no-display-inline" id="H874EE187D639471DBED781E6030AD5C2" style="OLC">
+                <clause id="HCFBA055CCC1F41E79A644817CEB7C87F">
+                  <enum>(ii)</enum>
+                  <text display-inline="yes-display-inline">any purchase or sale of a nonfinancial commodity or security for deferred shipment or delivery, so
+               long as the transaction is intended to be physically settled, including
+               any stand-alone or embedded option for which exercise results in a
+               physical delivery obligation;</text>
+                </clause>
+                <after-quoted-block>.</after-quoted-block>
+              </quoted-block>';
+
+      $expected = "";
+      $expected .= "***\n";
+      $expected .= "(ii) any purchase or sale of a nonfinancial commodity or security for deferred shipment or delivery, so\n";
+      $expected .= "long as the transaction is intended to be physically settled, including\n";
+      $expected .= "any stand-alone or embedded option for which exercise results in a\n";
+      $expected .= "physical delivery obligation;\n";
+      $expected .= "***\n";
+      $expected .= ".";
+
+      $simplexml = simplexml_load_string($raw);
+      $this->simplexml($simplexml);
+      $this->asMarkdown()->shouldBe($expected);
+    } 
 }

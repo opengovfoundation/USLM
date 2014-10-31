@@ -32,6 +32,9 @@ class QuotedBlock extends LegisBodyElement {
         case 'subparagraph':
           $element = new Subparagraph();
           break;
+        case 'clause':
+          $element = new Clause();
+          break;
         default:
           throw new Exception(get_class($this) . ' -> ' . $child->getName() . ' has not yet been implemented.');
       }
