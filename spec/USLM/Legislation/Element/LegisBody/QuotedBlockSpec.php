@@ -57,4 +57,24 @@ class QuotedBlockSpec extends ObjectBehavior
       $this->simplexml($simplexml);
       $this->asMarkdown()->shouldBe($expected);
     }
+
+    function it_should_handle_subparagraph_children() {
+      $raw = '<quoted-block style="OLC" id="HB5E322CB6DFA412FA4A9073070764E02" display-inline="no-display-inline">
+                <subparagraph id="HCB3F0A02C8984ABAB30F431D6EA8BC1E">
+                  <enum>(D)</enum>
+                  <text display-inline="yes-display-inline">that is under the jurisdiction of the Secretary of Defense or the Secretary of a military department;</text>
+                </subparagraph>
+                <after-quoted-block>.</after-quoted-block>
+              </quoted-block>';
+
+      $expected = "";
+      $expected .= "***\n";
+      $expected .= "(D) that is under the jurisdiction of the Secretary of Defense or the Secretary of a military department;\n";
+      $expected .= "***\n";
+      $expected .= ".";
+
+      $simplexml = simplexml_load_string($raw);
+      $this->simplexml($simplexml);
+      $this->asMarkdown()->shouldBe($expected);
+    }
 }

@@ -19,21 +19,22 @@ class LegisBody extends LegisBodyElement{
     foreach($children as $child){
       switch($child->getName()) {
         case 'section':
-          $section = new Section();
-          $section->simplexml($child);
-          $markdown .= $section->asMarkdown();
-          $markdown .= "\n";
+          $element = new Section();
           break;
         case 'division':
-          throw new Exception("LegisBody -> Division has not yet been implemented.");
+          $element = new Division();
           break;
         case 'title':
-          throw new Exception("LegisBody -> Title has not yet been implemented.");
-          break;
         default:
-          throw new Exception("Unknown LegisBody child " . $child->getName());
+          throw new Exception(get_class($this) . " -> " . $child->getName() . " has not yet been implemented.");
       }
+      
+      $element->simplexml($child);
+      $markdown .= $element->asMarkdown();
+      $markdown .= "\n";
     }
+
+    $markdown = rtrim($markdown, "\n");
 
     return $markdown;
   }
