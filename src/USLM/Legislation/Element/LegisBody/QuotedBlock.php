@@ -35,6 +35,9 @@ class QuotedBlock extends LegisBodyElement {
         case 'clause':
           $element = new Clause();
           break;
+        case 'quoted-block-continuation-text':
+          $element = new QuotedBlockContinuationText();
+          break;
         default:
           throw new Exception(get_class($this) . ' -> ' . $child->getName() . ' has not yet been implemented.');
       }

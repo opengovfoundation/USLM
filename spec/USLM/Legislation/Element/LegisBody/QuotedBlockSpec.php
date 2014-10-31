@@ -102,5 +102,23 @@ class QuotedBlockSpec extends ObjectBehavior
       $simplexml = simplexml_load_string($raw);
       $this->simplexml($simplexml);
       $this->asMarkdown()->shouldBe($expected);
-    } 
+    }
+
+    function it_should_handle_continuation_text() {
+      $raw = '<quoted-block display-inline="no-display-inline" id="HFCAAB758D1F54565B93ED92F51CC6BF8" style="OLC">
+                <quoted-block-continuation-text quoted-block-continuation-text-level="section">For purposes of this section, the term <term>minister of the gospel</term> includes any duly recognized official of a religious, spiritual, moral, or ethical organization
+             (whether theistic or not).</quoted-block-continuation-text>
+                <after-quoted-block>.</after-quoted-block>
+              </quoted-block>';
+
+      $expected = "";
+      $expected .= "***\n";
+      $expected .= "For purposes of this section, the term \"minister of the gospel\" includes any duly recognized official of a religious, spiritual, moral, or ethical organization (whether theistic or not).\n";
+      $expected .= "***\n";
+      $expected .= ".";
+
+      $simplexml = simplexml_load_string($raw);
+      $this->simplexml($simplexml);
+      $this->asMarkdown()->shouldBe($expected);
+    }
 }
