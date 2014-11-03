@@ -92,10 +92,7 @@ class QuotedBlockSpec extends ObjectBehavior
 
       $expected = "";
       $expected .= "***\n";
-      $expected .= "(ii) any purchase or sale of a nonfinancial commodity or security for deferred shipment or delivery, so\n";
-      $expected .= "long as the transaction is intended to be physically settled, including\n";
-      $expected .= "any stand-alone or embedded option for which exercise results in a\n";
-      $expected .= "physical delivery obligation;\n";
+      $expected .= "(ii) any purchase or sale of a nonfinancial commodity or security for deferred shipment or delivery, so long as the transaction is intended to be physically settled, including any stand-alone or embedded option for which exercise results in a physical delivery obligation;\n";
       $expected .= "***\n";
       $expected .= ".";
 

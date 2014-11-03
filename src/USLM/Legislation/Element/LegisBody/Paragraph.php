@@ -57,6 +57,12 @@ class Paragraph extends LegisBodyElement {
           $element->simplexml($child);
 
           $markdown .= "\n" . $this->indentList($element->asMarkdown(), 2);
+          break;
+        case 'subclause':
+          $element = new Subclause();
+          $element->simplexml($child);
+
+          $markdown .= "\n" . $this->indentList($element->asMarkdown(), 4);
         case 'enum':
         case 'header':
         case 'text':
