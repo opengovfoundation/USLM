@@ -137,4 +137,25 @@ class QuotedBlockSpec extends ObjectBehavior
       $this->simplexml($simplexml);
       $this->asMarkdown()->shouldBe($expected);
     }
+
+    function it_should_handle_text_children() {
+      $raw = '<quoted-block display-inline="yes-display-inline" id="HB0FB2BF353304463A80EC63111E3CC50" style="USC">
+                <text>this section:</text>
+                <paragraph id="HBE3478C1C6FC42BEB7A973848F65F973" indent="up1">
+                  <enum>(1)</enum>
+                  <text display-inline="yes-display-inline">The</text>
+                </paragraph>
+                <after-quoted-block>; and</after-quoted-block>
+              </quoted-block>';
+
+      $expected = "***\n";
+      $expected .= "this section:\n";
+      $expected .= "(1) The\n";
+      $expected .= "***\n";
+      $expected .= "; and";
+
+      $simplexml = simplexml_load_string($raw);
+      $this->simplexml($simplexml);
+      $this->asMarkdown()->shouldBe($expected);
+    }
 }

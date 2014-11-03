@@ -41,13 +41,19 @@ class QuotedBlock extends LegisBodyElement {
         case 'toc':
           $element = new TOC();
           break;
+        case 'text':
+          $element = new Text();
+          break;
         default:
           throw new Exception(get_class($this) . ' -> ' . $child->getName() . ' has not yet been implemented.');
       }
 
       $element->simplexml($child);
-      $markdown .= $this->stripMarkdownStyling($element->asMarkdown());
+      $markdown .= $this->stripMarkdownStyling($element->asMarkdown()) . "\n";
     }
+
+    //Trim trailing spaces / newlines if present
+    $markdown = trim($markdown);
     
     $markdown .= "\n***";
     
@@ -74,7 +80,7 @@ class QuotedBlock extends LegisBodyElement {
     //Remove bold styling wrapping lines
     $markdown = preg_replace('/^__(.*?)__$/m', '$1', $markdown);
 
-    //Trim any extra spaces / newlines
+    //Trim trailing spaces / newlines
     $markdown = trim($markdown);
 
     return $markdown;
