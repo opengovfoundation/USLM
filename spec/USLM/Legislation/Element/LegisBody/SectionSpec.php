@@ -98,4 +98,74 @@ class SectionSpec extends ObjectBehavior
       $this->simplexml($simplexml);
       $this->asMarkdown()->shouldBe($expected);
     }
+
+    function it_should_return_as_markdown_with_subparagraphs() {
+      $raw = '<section id="H7EB1EEA8B2ED49FC9C2E5FE2B5017D65" section-type="section-one">
+                <enum>1.</enum>
+                <header>Counseling and treatment for sexual trauma occurring during inactive duty for training</header>
+                <text display-inline="no-display-inline"><external-xref legal-doc="usc" parsable-cite="usc/38/1720D">Section 1720D</external-xref> of title 38, United States Code, is amended&#x2014;</text>
+                <paragraph id="H2DC2A70DBE734139992BD15A07083179">
+                  <enum>(1)</enum>
+                  <text display-inline="yes-display-inline">in subsection (a)(1), by striking <quote>active duty or active duty for training</quote> and inserting <quote>active duty, active duty for training, or inactive duty training</quote>; and</text>
+                </paragraph>
+                <paragraph id="H2A45A1C4C9E44CA1A52E2B41C65E04EA">
+                  <enum>(2)</enum>
+                  <text>in subsection (f)&#x2014;</text>
+                  <subparagraph id="H9CFE93E8F0984B1099DE6E2E4BD24894">
+                    <enum>(A)</enum>
+                    <text>by striking <quote>this section, the</quote> and inserting the following:</text>
+                    <quoted-block display-inline="yes-display-inline" id="HB0FB2BF353304463A80EC63111E3CC50" style="USC">
+                      <text>this section:</text>
+                      <paragraph id="HBE3478C1C6FC42BEB7A973848F65F973" indent="up1">
+                        <enum>(1)</enum>
+                        <text display-inline="yes-display-inline">The</text>
+                      </paragraph>
+                      <after-quoted-block>; and</after-quoted-block>
+                    </quoted-block>
+                  </subparagraph>
+                  <subparagraph id="H9DF57B6899BC44198465A5B3DC7AF93C">
+                    <enum>(B)</enum>
+                    <text>by adding at the end the following new paragraph:</text>
+                    <quoted-block display-inline="no-display-inline" id="HB7630BED0A2F4E9493C2B1BB28E55298" style="USC">
+                      <paragraph id="H16A12E2BE00649A788D1AD6A692E6A2D" indent="up1">
+                        <enum>(2)</enum>
+                        <text display-inline="yes-display-inline">The term <quote>veteran</quote>, with respect to inactive duty training described in subsection (a)(1), also includes an individual who&#x2014;</text>
+                        <subparagraph id="H4572607307C24A648CF0E2F348437C17">
+                          <enum>(A)</enum>
+                          <text>is not otherwise eligible for the benefits of this chapter; and</text>
+                        </subparagraph>
+                        <subparagraph id="H80B28A06C0F64534ADC6A756871BE0E6">
+                          <enum>(B)</enum>
+                          <text>while serving in the reserve components of the Armed Forces, performed such inactive duty training but did not serve on active duty.</text>
+                        </subparagraph>
+                      </paragraph>
+                      <after-quoted-block>.</after-quoted-block>
+                    </quoted-block>
+                  </subparagraph>
+                </paragraph>
+              </section>';
+
+      $expected = "";
+      $expected .= "* __1. Counseling and treatment for sexual trauma occurring during inactive duty for training__\n";
+      $expected .= "  * Section 1720D of title 38, United States Code, is amended—\n";
+      $expected .= "  * __(1)__ in subsection (a)(1), by striking \"active duty or active duty for training\" and inserting \"active duty, active duty for training, or inactive duty training\"; and\n";
+      $expected .= "  * __(2)__ in subsection (f)—\n";
+      $expected .= "    * __(A)__ by striking \"this section, the\" and inserting the following:\n";
+      $expected .= "***\n";
+      $expected .= "this section:\n";
+      $expected .= "(1) The\n";
+      $expected .= "***\n";
+      $expected .= "; and\n";
+      $expected .= "    * __(B)__ by adding at the end the following new paragraph:\n";
+      $expected .= "***\n";
+      $expected .= "(2) The term \"veteran\", with respect to inactive duty training described in subsection (a)(1), also includes an individual who—\n";
+      $expected .= "  (A) is not otherwise eligible for the benefits of this chapter; and\n"; 
+      $expected .= "  (B) while serving in the reserve components of the Armed Forces, performed such inactive duty training but did not serve on active duty.\n";
+      $expected .= "***\n";
+      $expected .= ".";
+
+      $simplexml = simplexml_load_string($raw);
+      $this->simplexml($simplexml);
+      $this->asMarkdown()->shouldBe($expected);
+    }
 }

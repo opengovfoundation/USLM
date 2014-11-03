@@ -25,7 +25,7 @@ class QuotedBlockSpec extends ObjectBehavior
       $expected = "";
       $expected .= "***\n";
       $expected .= "5211. Authorization of appropriations\n";
-      $expected .= "There are authorized to be appropriated to carry out this subpart $300,000,000 for fiscal year 2015 and each of the 5 succeeding fiscal years.\n";
+      $expected .= "  There are authorized to be appropriated to carry out this subpart $300,000,000 for fiscal year 2015 and each of the 5 succeeding fiscal years.\n";
       $expected .= "***\n";
       $expected .= ".";
 
@@ -49,7 +49,7 @@ class QuotedBlockSpec extends ObjectBehavior
       $expected = "";
       $expected .= "***\n";
       $expected .= "(g) Public Disclosure of LNG Export Destinations\n";
-      $expected .= "As a condition for approval of any authorization to export LNG, the Secretary of Energy shall require the applicant to publicly disclose the specific destination or destinations of any such authorized LNG exports.\n";
+      $expected .= "  As a condition for approval of any authorization to export LNG, the Secretary of Energy shall require the applicant to publicly disclose the specific destination or destinations of any such authorized LNG exports.\n";
       $expected .= "***\n";
       $expected .= ".";
 
