@@ -70,4 +70,32 @@ class SectionSpec extends ObjectBehavior
       $this->simplexml($simplexml);
       $this->asMarkdown()->shouldBeString();
     }
+
+    function it_should_return_as_markdown_with_appropriations() {
+      $raw = '<section id="H27C9DD73600F4DF2BA9822D804630D01">
+                <enum>2.</enum>
+                <header>Supplemental appropriation for the Office of the Inspector General of the Department of Veterans Affairs</header>
+                <text display-inline="no-display-inline">The following sums are appropriated, out of any money in the Treasury not otherwise appropriated, for fiscal year 2014:</text>
+                <appropriations-major id="HCB081D82343246198C49FEA7326065B4">
+                  <header>Department of Veterans Affairs</header>
+                </appropriations-major>
+                <appropriations-intermediate id="H2E4D865EC53B44A8B08737BE69C56873">
+                  <header>Departmental Administration</header>
+                </appropriations-intermediate>
+                <appropriations-small id="HDCAFF61B0EE84EF98FD9B0D99E55D172">
+                  <header>Office of Inspector General</header>
+                </appropriations-small>
+              </section>';
+
+      $expected = "";
+      $expected .= "* __2. Supplemental appropriation for the Office of the Inspector General of the Department of Veterans Affairs__\n";
+      $expected .= "  * The following sums are appropriated, out of any money in the Treasury not otherwise appropriated, for fiscal year 2014:\n";
+      $expected .= "#### Department of Veterans Affairs\n";
+      $expected .= "##### Departmental Administration\n";
+      $expected .= "###### Office of Inspector General";
+
+      $simplexml = simplexml_load_string($raw);
+      $this->simplexml($simplexml);
+      $this->asMarkdown()->shouldBe($expected);
+    }
 }

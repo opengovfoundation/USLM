@@ -61,6 +61,16 @@ class Section extends LegisBodyElement {
 
           $markdown .= "\n" . $this->indentList($element->asMarkdown(), 2);
           break;
+        case 'appropriations-major':
+        case 'appropriations-intermediate':
+        case 'appropriations-small':
+          //e.g. 'appropriations-major' -> USLM\Legislation\Element\Appropriations\AppropriationsMajor
+          $class_name = "USLM\\Legislation\\Element\\LegisBody\\Appropriations\\" . str_replace(' ', '', ucwords(str_replace('-', ' ', $child->getName())));
+          
+          $element = new $class_name(); 
+          $element->simplexml($child);
+
+          $markdown .= "\n" . $element->asMarkdown();
         case 'enum':
         case 'header':
           break;
