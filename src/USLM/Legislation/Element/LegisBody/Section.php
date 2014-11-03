@@ -71,6 +71,7 @@ class Section extends LegisBodyElement {
           $element->simplexml($child);
 
           $markdown .= "\n" . $element->asMarkdown();
+          break;
         case 'enum':
         case 'header':
           break;

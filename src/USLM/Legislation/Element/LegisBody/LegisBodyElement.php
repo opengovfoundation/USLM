@@ -12,6 +12,6 @@ abstract class LegisBodyElement extends LegislationElement {
 
   //Add spaces before all list items ( indenting the list and all sub-lists )
   public function indentList($string, $spaces){
-    return preg_replace('/^(\s*\*)/m', str_repeat(' ', $spaces) . "$1", $string);
+    return preg_replace('/^(\s*\*)[^*]/m', str_repeat(' ', $spaces) . "$1 ", $string);
   }
 }
