@@ -32,7 +32,7 @@ class ClauseSpec extends ObjectBehavior
       $expected .= "* __(ii) Bicycle Sharing System__\n";
       $expected .= "  * The term \"bicycle sharing system\" means a public transportation system—\n";
       $expected .= "    * __(I)__ consisting of a network of stations at which bicycles are made available to customers for commuting and short-term, point-to-point use within the network’s service area; and\n";
-      $expected .= "    * __(II)__ that is operated or authorized by a government agency or public-private partnership.\n";
+      $expected .= "    * __(II)__ that is operated or authorized by a government agency or public-private partnership.";
 
       $simplexml = simplexml_load_string($raw);
       $this->simplexml($simplexml);
