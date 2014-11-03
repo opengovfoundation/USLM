@@ -38,6 +38,9 @@ class QuotedBlock extends LegisBodyElement {
         case 'quoted-block-continuation-text':
           $element = new QuotedBlockContinuationText();
           break;
+        case 'toc':
+          $element = new TOC();
+          break;
         default:
           throw new Exception(get_class($this) . ' -> ' . $child->getName() . ' has not yet been implemented.');
       }
@@ -70,6 +73,9 @@ class QuotedBlock extends LegisBodyElement {
 
     //Remove bold styling wrapping lines
     $markdown = preg_replace('/^__(.*?)__$/m', '$1', $markdown);
+
+    //Trim any extra spaces / newlines
+    $markdown = trim($markdown);
 
     return $markdown;
   }

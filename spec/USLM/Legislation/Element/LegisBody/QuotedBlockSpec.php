@@ -121,4 +121,23 @@ class QuotedBlockSpec extends ObjectBehavior
       $this->simplexml($simplexml);
       $this->asMarkdown()->shouldBe($expected);
     }
+
+    function it_should_handle_toc_children() {
+      $raw = '<quoted-block display-inline="no-display-inline" id="H9211C218C97B4B5B99772B898115530A" style="USC">
+                <toc regeneration="no-regeneration">
+                  <toc-entry level="section">21110. Grade crossing exception.</toc-entry>
+                </toc>
+                <after-quoted-block>.</after-quoted-block>
+              </quoted-block>';
+
+      $expected = "";
+      $expected .= "***\n";
+      $expected .= "21110. Grade crossing exception.\n";
+      $expected .= "***\n";
+      $expected .= ".";
+
+      $simplexml = simplexml_load_string($raw);
+      $this->simplexml($simplexml);
+      $this->asMarkdown()->shouldBe($expected);
+    }
 }

@@ -38,4 +38,19 @@ class TOCSpec extends ObjectBehavior
       $this->simplexml($simplexml);
       $this->asMarkdown()->shouldBe($expected);
     }
+
+    function it_should_handle_single_children() {
+      $raw = '<toc regeneration="no-regeneration">
+                <toc-entry level="section">21110. Grade crossing exception.</toc-entry>
+              </toc>';
+
+      $expected = "";
+      $expected .= "***\n";
+      $expected .= "21110. Grade crossing exception.\n";
+      $expected .= "***";
+
+      $simplexml = simplexml_load_string($raw);
+      $this->simplexml($simplexml);
+      $this->asMarkdown()->shouldBe($expected);
+    }
 }
