@@ -15,7 +15,6 @@ class QuotedBlock extends LegisBodyElement {
     unset($block->{'after-quoted-block'});
 
     $markdown = "";
-    $markdown .= "***\n";
     $children = $this->xml->children();
 
     foreach($children as $child){
@@ -49,17 +48,30 @@ class QuotedBlock extends LegisBodyElement {
       }
 
       $element->simplexml($child);
-      $markdown .= $this->stripMarkdownStyling($element->asMarkdown()) . "\n";
+      $childMarkdown = $this->stripMarkdownStyling($element->asMarkdown());
+      $childMarkdown = $this->addBlockQuoteMarkers($childMarkdown);
+      $markdown .= "$childMarkdown\n";
     }
 
     //Trim trailing spaces / newlines if present
-    $markdown = trim($markdown);
-    
-    $markdown .= "\n***";
+    $markdown = rtrim($markdown);
     
     if((bool)$after){
       $markdown .= "\n" . (string)$after;
     }
+
+    return $markdown;
+  }
+
+  /**
+  * addBlockQuoteMarkers()
+  *   Adds '>' characters for block quote styling
+  *
+  * @param String
+  * @return String
+  */
+  public function addBlockQuoteMarkers($markdown){
+    $markdown = preg_replace('/^/m', '> ', $markdown);
 
     return $markdown;
   }

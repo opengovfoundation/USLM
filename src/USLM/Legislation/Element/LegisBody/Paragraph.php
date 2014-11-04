@@ -44,7 +44,7 @@ class Paragraph extends LegisBodyElement {
           $element = new QuotedBlock();
           $element->simplexml($child);
 
-          $markdown .= "\n" . $element->asMarkdown();
+          $markdown .= "\n" . $this->indentQuotedBlock($element->asMarkdown(), 2);
           break;
         case 'subparagraph':
           $element = new Subparagraph();

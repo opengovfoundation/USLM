@@ -42,7 +42,7 @@ class Section extends LegisBodyElement {
           $element = new QuotedBlock();
           $element->simplexml($child);
 
-          $markdown .= "\n" . $element->asMarkdown();
+          $markdown .= "\n" . $this->indentQuotedBlock($element->asMarkdown(), 2);
           break;
         case 'paragraph':
           $element = new Paragraph();

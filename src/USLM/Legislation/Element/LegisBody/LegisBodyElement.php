@@ -14,4 +14,8 @@ abstract class LegisBodyElement extends LegislationElement {
   public function indentList($string, $spaces){
     return preg_replace('/^(\s*\*)[^*]/m', str_repeat(' ', $spaces) . "$1 ", $string);
   }
+
+  public function indentQuotedBlock($string, $spaces){
+    return preg_replace('/^(\s*>\s)/m', str_repeat(' ', $spaces) . "$1", $string);
+  }
 }
