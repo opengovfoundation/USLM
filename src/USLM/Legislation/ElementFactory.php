@@ -29,8 +29,7 @@ class ElementFactory{
     $name = 'USLM\\Legislation\\Element\\' . ucfirst($name);
 
     if(class_exists($name)){
-      $element = new $name();
-      $element->simplexml($xml);
+      $element = new $name($type, $name, $xml);
 
       return $element;
     }else{

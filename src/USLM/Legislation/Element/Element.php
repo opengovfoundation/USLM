@@ -2,6 +2,8 @@
 
 namespace USLM\Legislation\Element;
 
+use USLM\Legislation\ElementFactory;
+
 use USLM\Exceptions\AttributeNotFoundException;
 use \Exception;
 
@@ -17,6 +19,27 @@ class Element{
       $this->simplexml($xml);  
     }
 	}
+
+  public function asMarkdown(){
+    $this->checkRequirements(array('xml'));
+
+    $children = $this->xml->children();
+
+    $markdown = "";
+
+    foreach($children as $child){
+      $name = $child->getName();
+
+      $element = ElementFactory::create('Unknown', $name, $child);
+
+      $markdown .= $element->asMarkdown();
+      $markdown .= "\n";
+    }
+
+    $markdown = rtrim($markdown, "\n");
+
+    return $markdown;
+  }
 
   //Add spaces before all list items ( indenting the list and all sub-lists )
   public function indentList($string, $spaces){
