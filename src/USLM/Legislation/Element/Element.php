@@ -31,8 +31,8 @@ class Element{
     $markdown .= $this->childrenMarkdown();
 
     $markdown = rtrim($markdown);
-    
-    if($this->parent !== null){
+
+    if($this->parent != null){
       $markdown = $this->indent($markdown, 2);
     }
 
@@ -57,6 +57,10 @@ class Element{
 
         $markdown .= "\n  * " . $element->asMarkdown();
       }
+    }else if($enum && $text){
+      $element = new Text();
+      $element->simplexml($text);
+      $markdown .= "* __" . $enum . "__ " . $element->asMarkdown();
     }
 
     return trim($markdown);

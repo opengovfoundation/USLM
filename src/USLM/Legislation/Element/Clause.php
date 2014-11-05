@@ -2,6 +2,6 @@
 
 namespace USLM\Legislation\Element;
 
-class Clause extends Subparagraph {
+class Clause extends Element {
 
 }
