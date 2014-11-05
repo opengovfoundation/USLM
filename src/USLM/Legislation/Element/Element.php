@@ -27,7 +27,10 @@ class Element{
     $this->checkRequirements(array('xml'));
 
     $markdown = $this->selfMarkdown();
+    $markdown .= "\n";
     $markdown .= $this->childrenMarkdown();
+
+    $markdown = rtrim($markdown);
     
     if($this->parent !== null){
       $markdown = $this->indent($markdown, 2);
