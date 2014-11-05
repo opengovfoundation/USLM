@@ -100,18 +100,4 @@ class Section extends Element {
 
   //   return $markdown;
   // }
-
-  public function selfMarkdown() {
-    $this->checkRequirements('xml');
-
-    //Grab the scalar elements
-    $enum = $this->xml->enum;
-    $header = $this->xml->header;
-
-    //Create markdown string
-    $markdown = "";
-    $markdown .= "* __" . "$enum $header" . "__";
-
-    return $markdown;
-  }
 }

@@ -12,6 +12,8 @@ class Element{
 	public $parent;
 	public $xml;
 
+  public $skipped = array('enum', 'header', 'text');
+
 	public function __construct($type = null, $name = null, $parent = null, $xml = null){
     $this->type = $type;
     $this->name = $name;
@@ -39,21 +41,19 @@ class Element{
 
     $enum = $this->xml->enum;
     $header = $this->xml->header;
+
     $text = $this->xml->text;
 
     $markdown = "";
 
-    if(!$enum && !$header && !$text){
-      $markdown .= (string)$this->xml;
-      return $markdown;
-    }else if(!$enum && !$header){
-      $text = new Text();
-      $markdown .= "* " . $text->asMarkdown();
-    }else if(!$text){
-      $markdown .= "* $enum $header";
-    }else{
-      $markdown .= "* $enum $header";
-      $markdown .= "*  $text";
+    if($enum && $header){
+      $markdown .= "* __" . "$enum $header" . "__";
+      if($text){
+        $element = new Text();
+        $element->simplexml($text);
+
+        $markdown .= "\n  * " . $element->asMarkdown();
+      }
     }
 
     return trim($markdown);
@@ -66,6 +66,10 @@ class Element{
 
     foreach($children as $child){
       $name = $child->getName();
+
+      if(in_array($name, $this->skipped)){
+        continue;
+      }
 
       $element = ElementFactory::create('Unknown', $name, $this, $child);
 
