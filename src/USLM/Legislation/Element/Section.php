@@ -17,6 +17,11 @@ use \Exception;
 
 class Section extends Element {
   
+  public function __construct($type = null, $name = null, $parent = null, $xml = null){
+    parent::__construct($type, $name, $parent, $xml);
+    $this->parent = null;
+  }
+
   /**
   * asMarkdown()
   *

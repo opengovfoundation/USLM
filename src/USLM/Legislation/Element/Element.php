@@ -12,9 +12,10 @@ class Element{
 	public $parent;
 	public $xml;
 
-	public function __construct($type = null, $name = null, $xml = null){
+	public function __construct($type = null, $name = null, $parent = null, $xml = null){
     $this->type = $type;
     $this->name = $name;
+    $this->parent = $parent;
     if(isset($xml)){
       $this->simplexml($xml);  
     }
@@ -24,7 +25,11 @@ class Element{
     $this->checkRequirements(array('xml'));
 
     $markdown = $this->selfMarkdown();
-    $markdown .= $this->indent($this->childrenMarkdown(), 2);
+    $markdown .= $this->childrenMarkdown();
+    
+    if($this->parent !== null){
+      $markdown = $this->indent($markdown, 2);
+    }
 
     return $markdown;
   }
@@ -39,6 +44,7 @@ class Element{
     $markdown = "";
 
     if(!$enum && !$header && !$text){
+      $markdown .= (string)$this->xml;
       return $markdown;
     }else if(!$enum && !$header){
       $text = new Text();
@@ -50,7 +56,7 @@ class Element{
       $markdown .= "*  $text";
     }
 
-    return $markdown;
+    return trim($markdown);
   }
 
   public function childrenMarkdown(){
@@ -61,7 +67,7 @@ class Element{
     foreach($children as $child){
       $name = $child->getName();
 
-      $element = ElementFactory::create('Unknown', $name, $child);
+      $element = ElementFactory::create('Unknown', $name, $this, $child);
 
       $markdown .= $element->asMarkdown();
       $markdown .= "\n";

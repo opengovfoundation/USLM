@@ -306,7 +306,7 @@ class HouseBill extends Legislation{
     $this->checkRequirements(array('xml'));
     $body = $this->getBody();
 
-    $legisBody = ElementFactory::create('Structure', 'Legisbody', $body);
+    $legisBody = ElementFactory::create('Structure', 'Legisbody', null, $body);
 
     //$legisBody = new LegisBody();
     //$legisBody->simplexml($body);
