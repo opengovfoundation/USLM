@@ -4,7 +4,7 @@ namespace USLM\Legislation\Element;
 
 use \Exception;
 
-class QuotedBlock extends Element {
+class Quotedblock extends Element {
 
   public function asMarkdown() {
     $this->checkRequirements(array('xml'));

@@ -26,6 +26,7 @@ class ElementFactory{
   }
 
   protected static function createElement($type, $name, $xml){
+    $name = str_replace('-', '', $name);
     $name = 'USLM\\Legislation\\Element\\' . ucfirst($name);
 
     if(class_exists($name)){

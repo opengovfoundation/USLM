@@ -23,6 +23,37 @@ class Element{
   public function asMarkdown(){
     $this->checkRequirements(array('xml'));
 
+    $markdown = $this->selfMarkdown();
+    $markdown .= $this->indent($this->childrenMarkdown(), 2);
+
+    return $markdown;
+  }
+
+  public function selfMarkdown(){
+    $this->checkRequirements('xml');
+
+    $enum = $this->xml->enum;
+    $header = $this->xml->header;
+    $text = $this->xml->text;
+
+    $markdown = "";
+
+    if(!$enum && !$header && !$text){
+      return $markdown;
+    }else if(!$enum && !$header){
+      $text = new Text();
+      $markdown .= "* " . $text->asMarkdown();
+    }else if(!$text){
+      $markdown .= "* $enum $header";
+    }else{
+      $markdown .= "* $enum $header";
+      $markdown .= "*  $text";
+    }
+
+    return $markdown;
+  }
+
+  public function childrenMarkdown(){
     $children = $this->xml->children();
 
     $markdown = "";
@@ -41,11 +72,17 @@ class Element{
     return $markdown;
   }
 
+  //Indent a block of text
+  public function indent($string, $spaces){
+    return preg_replace('/^/m', str_repeat(' ', $spaces), $string);
+  }
+
   //Add spaces before all list items ( indenting the list and all sub-lists )
   public function indentList($string, $spaces){
     return preg_replace('/^(\s*\*)[^*]/m', str_repeat(' ', $spaces) . "$1 ", $string);
   }
 
+  //Add spaces before all quoted block lines ( indenting any lines starting with >)
   public function indentQuotedBlock($string, $spaces){
     return preg_replace('/^(\s*>\s)/m', str_repeat(' ', $spaces) . "$1", $string);
   }
@@ -59,20 +96,6 @@ class Element{
       throw new Exception("Cannot load " . gettype($xml) . " as simplexml object.");
     }
   }
-
-	protected function required($attributes){
-		if(is_array($attributes)){
-			foreach($attributes as $attribute){
-				if(!isset($this->$attribute)){
-					throw new Exception('Attribute ' . $attribute . ' isn\'t set for ' . print_r($this, true) . "\n\n Aborting.");
-				}
-			}
-		}else{
-			if(!isset($this->$attributes)){
-				throw new Exception('Attribute ' . $attributes . ' isn\'t set for ' . print_r($this, true) . "\n\n Aborting.");
-			}
-		}
-	}
 
 	protected function accessor($attribute, $value = null){
 		if(!isset($attribute)){
@@ -91,10 +114,17 @@ class Element{
   *   If any of the attributes don't exist, throw an exception
   */
   protected function checkRequirements($attributes){
-    foreach($attributes as $attribute){
-      if(!isset($this->$attribute)){
-        throw new AttributeNotFoundException("$attribute is not defined on " . get_class($this));
+    if(is_array($attributes)){
+      foreach($attributes as $attribute){
+        if(!isset($this->$attribute)){
+          throw new AttributeNotFoundException("$attribute is not defined on " . get_class($this));
+        }
+      }
+    }else{
+      if(!isset($this->$attributes)){
+        throw new AttributeNotFoundException("$attributes is not defined on " . get_class($this));
       }
     }
+    
   }
 }
