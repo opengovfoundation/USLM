@@ -1,6 +1,6 @@
 <?php
 
-namespace USLM;
+namespace USLM\Legislation;
 
 use USLM\Exceptions\AttributeNotFoundException;
 
