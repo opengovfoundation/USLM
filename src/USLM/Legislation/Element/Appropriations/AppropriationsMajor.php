@@ -1,10 +1,10 @@
 <?php
 
-namespace USLM\Legislation\Element\LegisBody\Appropriations;
+namespace USLM\Legislation\Element\Appropriations;
 
-use USLM\Legislation\Element\LegisBody\LegisBodyElement;
+use USLM\Legislation\Element\Element;
 
-class AppropriationsMajor extends LegisBodyElement{
+class AppropriationsMajor extends Element{
 
   public $header = "####";
 

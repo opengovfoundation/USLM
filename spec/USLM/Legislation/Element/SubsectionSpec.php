@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\USLM\Legislation\Element\LegisBody;
+namespace spec\USLM\Legislation\Element;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -9,7 +9,7 @@ class SubsectionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('USLM\Legislation\Element\LegisBody\Subsection');
+        $this->shouldHaveType('USLM\Legislation\Element\Subsection');
     }
 
     function it_should_return_markdown_with_toc() {

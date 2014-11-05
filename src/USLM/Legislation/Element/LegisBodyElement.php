@@ -2,7 +2,7 @@
 /**
 * Abstract LegisBodyElement Class
 */
-namespace USLM\Legislation\Element\LegisBody;
+namespace USLM\Legislation\Element;
 
 use USLM\Legislation\Element\LegislationElement;
 

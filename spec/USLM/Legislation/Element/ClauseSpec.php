@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\USLM\Legislation\Element\LegisBody;
+namespace spec\USLM\Legislation\Element;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -9,7 +9,7 @@ class ClauseSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('USLM\Legislation\Element\LegisBody\Clause');
+        $this->shouldHaveType('USLM\Legislation\Element\Clause');
     }
 
     function it_should_output_as_markdown_with_subclause() {

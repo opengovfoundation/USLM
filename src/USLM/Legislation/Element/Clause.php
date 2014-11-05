@@ -1,6 +1,6 @@
 <?php
 
-namespace USLM\Legislation\Element\LegisBody;
+namespace USLM\Legislation\Element;
 
 class Clause extends Subparagraph {
 

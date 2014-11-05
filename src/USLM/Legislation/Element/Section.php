@@ -11,11 +11,11 @@
 *   - continuation-text?
 */
 
-namespace USLM\Legislation\Element\LegisBody;
+namespace USLM\Legislation\Element;
 
 use \Exception;
 
-class Section extends LegisBodyElement {
+class Section extends Element {
   
   /**
   * asMarkdown()
@@ -76,7 +76,7 @@ class Section extends LegisBodyElement {
         case 'appropriations-intermediate':
         case 'appropriations-small':
           //e.g. 'appropriations-major' -> USLM\Legislation\Element\Appropriations\AppropriationsMajor
-          $class_name = "USLM\\Legislation\\Element\\LegisBody\\Appropriations\\" . str_replace(' ', '', ucwords(str_replace('-', ' ', $child->getName())));
+          $class_name = "USLM\\Legislation\\Element\\Appropriations\\" . str_replace(' ', '', ucwords(str_replace('-', ' ', $child->getName())));
           
           $element = new $class_name(); 
           $element->simplexml($child);

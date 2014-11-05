@@ -3,11 +3,11 @@
 * LegisBody element class
 *
 */
-namespace USLM\Legislation\Element\LegisBody;
+namespace USLM\Legislation\Element;
 
 use \Exception;
 
-class LegisBody extends LegisBodyElement{
+class Legisbody extends Element{
 
   public function asMarkdown() {
     $this->checkRequirements(array('xml'));

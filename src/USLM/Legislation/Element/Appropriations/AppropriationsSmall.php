@@ -1,6 +1,6 @@
 <?php
 
-namespace USLM\Legislation\Element\LegisBody\Appropriations;
+namespace USLM\Legislation\Element\Appropriations;
 
 class AppropriationsSmall extends AppropriationsMajor{
 

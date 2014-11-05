@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\USLM\Legislation\Element\LegisBody;
+namespace spec\USLM\Legislation\Element;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -9,7 +9,7 @@ class TOCSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('USLM\Legislation\Element\LegisBody\TOC');
+        $this->shouldHaveType('USLM\Legislation\Element\TOC');
     }
 
     function it_should_return_markdown() {

@@ -1,21 +1,41 @@
 <?php
 
-namespace USLM\Legislation;
+namespace USLM\Legislation\Element;
 
 use USLM\Exceptions\AttributeNotFoundException;
+use \Exception;
 
 class Element{
 
 	public $parent;
 	public $xml;
 
-	public function __construct(){
-
+	public function __construct($type = null, $name = null, $xml = null){
+    $this->type = $type;
+    $this->name = $name;
+    if(isset($xml)){
+      $this->simplexml($xml);  
+    }
 	}
 
-	public function simplexml($xml = null){
-		return $this->accessor('xml', $xml);
-	}
+  //Add spaces before all list items ( indenting the list and all sub-lists )
+  public function indentList($string, $spaces){
+    return preg_replace('/^(\s*\*)[^*]/m', str_repeat(' ', $spaces) . "$1 ", $string);
+  }
+
+  public function indentQuotedBlock($string, $spaces){
+    return preg_replace('/^(\s*>\s)/m', str_repeat(' ', $spaces) . "$1", $string);
+  }
+
+	public function simplexml($xml){
+    if(get_class($xml) === 'SimpleXMLElement'){
+      $this->xml = $xml;  
+    }elseif(gettype($xml) === "string"){
+      $this->xml = simplexml_load_string($xml);
+    }else{
+      throw new Exception("Cannot load " . gettype($xml) . " as simplexml object.");
+    }
+  }
 
 	protected function required($attributes){
 		if(is_array($attributes)){
