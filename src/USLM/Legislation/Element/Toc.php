@@ -1,10 +1,10 @@
 <?php
 
-namespace USLM\Legislation\Element\LegisBody;
+namespace USLM\Legislation\Element;
 
 use \Exception;
 
-class TOC extends LegisBodyElement
+class Toc extends Element
 {
     public function asMarkdown(){
       $this->checkRequirements(array('xml'));

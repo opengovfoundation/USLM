@@ -1,8 +1,8 @@
 <?php
 
-namespace USLM\Legislation\Element\LegisBody;
+namespace USLM\Legislation\Element;
 
-class QuotedBlockContinuationText extends LegisBodyElement{
+class Quotedblockcontinuationtext extends Element{
 
   public function asMarkdown() {
     $this->checkRequirements(array('xml'));

@@ -1,8 +1,8 @@
 <?php
 
-namespace USLM\Legislation\Element\LegisBody;
+namespace USLM\Legislation\Element;
 
-class Division extends LegisBodyElement
+class Division extends Element
 {
   public function asMarkdown() {
     $markdown = "";

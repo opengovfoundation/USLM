@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\USLM\Legislation\Element\LegisBody;
+namespace spec\USLM\Legislation\Element;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -9,7 +9,7 @@ class ParagraphSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('USLM\Legislation\Element\LegisBody\Paragraph');
+        $this->shouldHaveType('USLM\Legislation\Element\Paragraph');
     }
 
     function it_should_return_markdown() {
@@ -62,14 +62,14 @@ class ParagraphSpec extends ObjectBehavior
       $expected = "";
       $expected .= "* __(2)__ in subsection (f)—\n";
       $expected .= "  * __(A)__ by striking \"this section, the\" and inserting the following:\n";
-      $expected .= "  > this section:\n";
-      $expected .= "  > (1) The\n";
-      $expected .= "; and\n";
+      $expected .= "    > this section:\n";
+      $expected .= "    > (1) The\n";
+      $expected .= "    ; and\n";
       $expected .= "  * __(B)__ by adding at the end the following new paragraph:\n";
-      $expected .= "  > (2) The term \"veteran\", with respect to inactive duty training described in subsection (a)(1), also includes an individual who—\n";
-      $expected .= "  >   (A) is not otherwise eligible for the benefits of this chapter; and\n"; 
-      $expected .= "  >   (B) while serving in the reserve components of the Armed Forces, performed such inactive duty training but did not serve on active duty.\n";
-      $expected .= ".";
+      $expected .= "    > (2) The term \"veteran\", with respect to inactive duty training described in subsection (a)(1), also includes an individual who—\n";
+      $expected .= "    >   (A) is not otherwise eligible for the benefits of this chapter; and\n"; 
+      $expected .= "    >   (B) while serving in the reserve components of the Armed Forces, performed such inactive duty training but did not serve on active duty.\n";
+      $expected .= "    .";
 
       $simplexml = simplexml_load_string($raw);
       $this->simplexml($simplexml);
@@ -94,7 +94,7 @@ class ParagraphSpec extends ObjectBehavior
       $expected .= "  >   (K) operates in accordance with State law;\n";
       $expected .= "  >   (L) has a written performance contract with the authorized public chartering agency in the State that includes a description of how student performance will be measured in charter schools pursuant to State assessments that are required of other schools and pursuant to any other assessments mutually agreeable to the authorized public chartering agency and the charter school; and\n";
       $expected .= "  >   (M) may serve prekindergarten or postsecondary students.\n";
-      $expected .= ";";
+      $expected .= "  ;";
 
       return $expected;
     }

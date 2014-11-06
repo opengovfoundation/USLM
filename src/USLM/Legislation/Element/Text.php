@@ -1,8 +1,8 @@
 <?php
 
-namespace USLM\Legislation\Element\LegisBody;
+namespace USLM\Legislation\Element;
 
-class Text extends LegisBodyElement {
+class Text extends Element {
 
   public function asMarkdown() {
     $this->checkRequirements(array('xml'));

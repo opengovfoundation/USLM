@@ -3,7 +3,8 @@
 * Abstract Legislation Class
 */
 namespace USLM\Legislation;
-use USLM\Element;
+
+use USLM\Legislation\Element\Element;
 
 abstract class Legislation extends Element{
 
