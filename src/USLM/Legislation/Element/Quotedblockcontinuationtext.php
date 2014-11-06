@@ -2,7 +2,7 @@
 
 namespace USLM\Legislation\Element;
 
-class QuotedBlockContinuationText extends Element{
+class Quotedblockcontinuationtext extends Element{
 
   public function asMarkdown() {
     $this->checkRequirements(array('xml'));
