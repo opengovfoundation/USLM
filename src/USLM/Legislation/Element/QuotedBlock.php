@@ -9,55 +9,24 @@ class Quotedblock extends Element {
   public function asMarkdown() {
     $this->checkRequirements(array('xml'));
 
-    $after = (string)$this->xml->{'after-quoted-block'};
+    $after = $this->xml->{'after-quoted-block'};
 
-    $block = $this->xml;
-    unset($block->{'after-quoted-block'});
-
-    $markdown = "";
-    $children = $this->xml->children();
-
-    foreach($children as $child){
-      switch($child->getName()){
-        case 'paragraph':
-          $element = new Paragraph();
-          break;
-        case 'section':
-          $element = new Section();
-          break;
-        case 'subsection':
-          $element = new Subsection();
-          break;
-        case 'subparagraph':
-          $element = new Subparagraph();
-          break;
-        case 'clause':
-          $element = new Clause();
-          break;
-        case 'quoted-block-continuation-text':
-          $element = new QuotedBlockContinuationText();
-          break;
-        case 'toc':
-          $element = new TOC();
-          break;
-        case 'text':
-          $element = new Text();
-          break;
-        default:
-          throw new Exception(get_class($this) . ' -> ' . $child->getName() . ' has not yet been implemented.');
-      }
-
-      $element->simplexml($child);
-      $childMarkdown = $this->stripMarkdownStyling($element->asMarkdown());
-      $childMarkdown = $this->addBlockQuoteMarkers($childMarkdown);
-      $markdown .= "$childMarkdown\n";
+    $markdown = $this->selfMarkdown();
+    
+    $childMarkdown = $this->childrenMarkdown();
+    
+    if($childMarkdown){
+      $markdown .= "\n$childMarkdown";
     }
 
-    //Trim trailing spaces / newlines if present
-    $markdown = rtrim($markdown);
-    
-    if((bool)$after){
-      $markdown .= "\n" . (string)$after;
+    $markdown = trim($markdown);
+
+    $markdown = $this->stripMarkdownStyling($markdown);
+    $markdown = $this->addBlockQuoteMarkers($markdown);
+    $markdown .= "\n" . (string)$after;
+
+    if($this->parent != null){
+      $markdown = $this->indent($markdown, 2);
     }
 
     return $markdown;

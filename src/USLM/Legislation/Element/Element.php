@@ -12,7 +12,7 @@ class Element{
 	public $parent;
 	public $xml;
 
-  public $skipped = array('enum', 'header', 'text');
+  public $skipped = array('enum', 'header', 'text', 'after-quoted-block');
 
 	public function __construct($type = null, $name = null, $parent = null, $xml = null){
     $this->type = $type;
@@ -32,8 +32,8 @@ class Element{
 
     $markdown = rtrim($markdown);
 
-    if($this->parent != null){
-      $markdown = $this->indent($markdown, 2);
+    if($this->parent != null && get_class($this->parent) != 'USLM\Legislation\Element\Quotedblock'){
+       $markdown = $this->indent($markdown, 2);
     }
 
     return $markdown;
@@ -61,6 +61,10 @@ class Element{
       $element = new Text();
       $element->simplexml($text);
       $markdown .= "* __" . $enum . "__ " . $element->asMarkdown();
+    }else if($text){
+      $element = new Text();
+      $element->simplexml($text);
+      $markdown .= "* " . $element->asMarkdown();
     }
 
     return trim($markdown);
@@ -84,7 +88,11 @@ class Element{
       $markdown .= "\n";
     }
 
-    $markdown = rtrim($markdown, "\n");
+    $markdown = trim($markdown, "\n");
+
+    if(preg_match('/^\s*$/', $markdown)){
+      return false;
+    }
 
     return $markdown;
   }

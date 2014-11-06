@@ -2,6 +2,6 @@
 
 namespace USLM\Legislation\Element;
 
-class Subparagraph extends Element {
+class Afterquotedblock extends Element {
 
 }
