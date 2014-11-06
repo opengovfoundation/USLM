@@ -4,7 +4,7 @@ namespace USLM\Legislation\Element;
 
 use \Exception;
 
-class TOC extends Element
+class Toc extends Element
 {
     public function asMarkdown(){
       $this->checkRequirements(array('xml'));
