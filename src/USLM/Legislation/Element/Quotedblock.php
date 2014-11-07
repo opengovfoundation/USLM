@@ -65,7 +65,7 @@ class Quotedblock extends Element {
     $markdown = preg_replace('/^(\s*)__([^\s]+)__/m', '$1$2', $markdown);
 
     //Remove bold styling wrapping lines
-    $markdown = preg_replace('/^__(.*?)__$/m', '$1', $markdown);
+    $markdown = preg_replace('/^(\s*)__(.*?)__$/m', '$1$2', $markdown);
 
     //Trim trailing spaces / newlines
     $markdown = rtrim($markdown);

@@ -171,4 +171,42 @@ class QuotedBlockSpec extends ObjectBehavior
       $this->simplexml($raw);
       $this->asMarkdown()->shouldBe($expected);
     }
+
+    function it_should_handle_parts() {
+      $raw = '<quoted-block display-inline="no-display-inline" id="HC70954483F9B4D0AA213BFF2E5D3AC7E" style="OLC">
+                <part id="H3E7EBC7D895340AC985059F899678118">
+                  <enum>VIII</enum>
+                  <header>Ratable inclusion of certain income</header>
+                  <toc regeneration="no-regeneration">
+                    <toc-entry level="section">Sec. 1351A. 15-year ratable inclusion of cancelled student loan debt.</toc-entry>
+                  </toc>
+                  <section id="H4897AA5977EE45C6B0E682AC056A1197">
+                    <enum>1351A.</enum>
+                    <header>15-year ratable inclusion of cancelled student loan debt</header>
+                    <subsection id="HD46C19837FF444778854DAB45646113E">
+                      <enum>(a)</enum>
+                      <header>In general</header>
+                      <text display-inline="yes-display-inline">In the case of any individual who elects the application of this section for any taxable year, any
+             amount which (but for this section) would be includible in gross income
+             for the taxable year by reason of the discharge (in whole or in part) of
+             any student loan (as defined by section 108(f)(2)) by reason of death or
+             disability shall be so included ratably over the 15-taxable-year period
+             beginning with the taxable year of such discharge.</text>
+                    </subsection>
+                  </section>
+                </part>
+                <after-quoted-block>.</after-quoted-block>
+              </quoted-block>';
+
+      $expected = "";
+      $expected .= "> VIII Ratable inclusion of certain income\n";
+      $expected .= "> Sec. 1351A. 15-year ratable inclusion of cancelled student loan debt.\n";
+      $expected .= "> 1351A. 15-year ratable inclusion of cancelled student loan debt\n";
+      $expected .= ">   (a) In general\n";
+      $expected .= ">     In the case of any individual who elects the application of this section for any taxable year, any amount which (but for this section) would be includible in gross income for the taxable year by reason of the discharge (in whole or in part) of any student loan (as defined by section 108(f)(2)) by reason of death or disability shall be so included ratably over the 15-taxable-year period beginning with the taxable year of such discharge.\n";
+      $expected .= ".";
+
+      $this->simplexml($raw);
+      $this->asMarkdown()->shouldbe($expected);
+    }
 }
