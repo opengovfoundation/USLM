@@ -15,6 +15,10 @@ class ElementFactory{
 
   protected static function createElement($type, $name, $parent, $xml){
     $name = str_replace('-', '', $name);
+
+    //Hack because we can't create a 'List' class as it's a php reserved keyword.
+    $name = $name === 'list' ? 'listt' : $name;
+
     $name = 'USLM\\Legislation\\Element\\' . ucfirst($name);
 
     if(class_exists($name)){

@@ -145,4 +145,30 @@ class QuotedBlockSpec extends ObjectBehavior
       $this->simplexml($simplexml);
       $this->asMarkdown()->shouldBe($expected);
     }
+
+    function it_should_handle_lists() {
+      $raw = '<quoted-block display-inline="no-display-inline" id="H0F21F4BF213F466DAB0922DFC0490877" style="OLC">
+                <list level="subsection">
+                  <list-item>Not later than 180 days after the end of each fiscal year, the Director of the Board of Prisons
+             shall submit to the President and Congress a report with respect to the
+             preceding fiscal year. The report shall contain a detailed summary and
+             analysis of the most recent data regarding the rate at which juveniles are
+             subject to solitary confinement and the trends demonstrated by the data
+             described in the next sentence. The data referred to in the preceding
+             sentence are, for each juvenile who was subject to solitary confinement
+             during the period to which the report pertains, the types of offenses for
+             which the juvenile is incarcerated, the race, gender, and age of the
+             juvenile, how many hours the juvenile was subject to solitary confinement;
+             and the purpose for the solitary confinement.</list-item>
+                </list>
+                <after-quoted-block>.</after-quoted-block>
+              </quoted-block>';
+
+      $expected = "";
+      $expected .= "> • Not later than 180 days after the end of each fiscal year, the Director of the Board of Prisons shall submit to the President and Congress a report with respect to the preceding fiscal year. The report shall contain a detailed summary and analysis of the most recent data regarding the rate at which juveniles are subject to solitary confinement and the trends demonstrated by the data described in the next sentence. The data referred to in the preceding sentence are, for each juvenile who was subject to solitary confinement during the period to which the report pertains, the types of offenses for which the juvenile is incarcerated, the race, gender, and age of the juvenile, how many hours the juvenile was subject to solitary confinement; and the purpose for the solitary confinement.\n";
+      $expected .= ".";
+
+      $this->simplexml($raw);
+      $this->asMarkdown()->shouldBe($expected);
+    }
 }
