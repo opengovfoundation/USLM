@@ -65,6 +65,8 @@ class Element{
       $element = new Text();
       $element->simplexml($text);
       $markdown .= "* " . $element->asMarkdown();
+    }else{
+      $markdown .= "* " . (string)$this->xml;
     }
 
     return trim($markdown);
@@ -113,7 +115,7 @@ class Element{
   }
 
 	public function simplexml($xml){
-    if(get_class($xml) === 'SimpleXMLElement'){
+    if(gettype($xml) === 'object' && get_class($xml) === 'SimpleXMLElement'){
       $this->xml = $xml;  
     }elseif(gettype($xml) === "string"){
       $this->xml = simplexml_load_string($xml);

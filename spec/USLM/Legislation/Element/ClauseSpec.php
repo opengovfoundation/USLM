@@ -38,4 +38,34 @@ class ClauseSpec extends ObjectBehavior
       $this->simplexml($simplexml);
       $this->asMarkdown()->shouldBe($expected);
     }
+
+    function it_should_handle_continuation_text() {
+      $raw = '<clause id="H82ECA92401194624AAF7D5EFED85F4ED">
+                <enum>(ii)</enum>
+                <text display-inline="yes-display-inline">create and implement, for services furnished not later than the date of the enactment of this
+             clause and in a budget neutral manner, additional groups of covered OPD
+             services that classify separately those procedures that utilize a drug
+             (other than contrast agents and diagnostic radiopharmaceuticals) that
+             both—</text>
+                <subclause id="H63E62C509BF845618A45FD7E469E7E37">
+                  <enum>(I)</enum>
+                  <text>has a cost above the drug packaging threshold; and</text>
+                </subclause>
+                <subclause id="H75D093A42BFB47778E07C9B2F3CDE0FF">
+                  <enum>(II)</enum>
+                  <text>functions as a supply when used in a diagnostic test or procedure;</text>
+                </subclause>
+                <continuation-text continuation-text-level="clause">from those that do not; and</continuation-text>
+              </clause>';
+
+      $expected = "";
+      $expected .= "* __(ii)__ create and implement, for services furnished not later than the date of the enactment of this clause and in a budget neutral manner, additional groups of covered OPD services that classify separately those procedures that utilize a drug (other than contrast agents and diagnostic radiopharmaceuticals) that both—\n";
+      $expected .= "  * __(I)__ has a cost above the drug packaging threshold; and\n";
+      $expected .= "  * __(II)__ functions as a supply when used in a diagnostic test or procedure;\n";
+      $expected .= "  * from those that do not; and";
+
+      
+      $this->simplexml($raw);
+      $this->asMarkdown()->shouldBe($expected);
+    }
 }
