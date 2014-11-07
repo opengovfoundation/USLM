@@ -27,8 +27,14 @@ class Element{
     $this->checkRequirements(array('xml'));
 
     $markdown = $this->selfMarkdown();
-    $markdown .= "\n";
-    $markdown .= $this->childrenMarkdown();
+    
+    //If this element has markdown content ( such as legis-body )
+    if($markdown){
+      $markdown .= "\n";
+      $markdown .= $this->childrenMarkdown();
+    }else{//Otherwise just use it's children
+      $markdown = $this->childrenMarkdown();
+    }
 
     $markdown = rtrim($markdown);
 
@@ -66,7 +72,11 @@ class Element{
       $element->simplexml($text);
       $markdown .= "* " . $element->asMarkdown();
     }else{
-      $markdown .= "* " . (string)$this->xml;
+      if(trim((string)$this->xml) != ''){
+        $markdown .= "* " . (string)$this->xml;  
+      }else{
+        return false;
+      }
     }
 
     return trim($markdown);
