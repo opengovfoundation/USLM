@@ -17,7 +17,7 @@ class TableSpec extends ObjectBehavior
       $expected = $this->getMarkdownTable();
 
       $this->simplexml($raw);
-      $this->getBodyAsMarkdown()->shouldBe($expected);
+      $this->asMarkdown()->shouldBe($expected);
     }
 
     function it_should_convert_rows_to_markdown(){

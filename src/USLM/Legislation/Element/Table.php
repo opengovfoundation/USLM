@@ -11,7 +11,7 @@ class Table extends Element
   * @param void
   * @return String
   */
-  public function getBodyAsMarkdown() {
+  public function asMarkdown() {
     $this->checkRequirements('xml');
 
     $headers = $this->getHeaders();
