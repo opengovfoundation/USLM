@@ -59,6 +59,34 @@ class TableSpec extends ObjectBehavior
       $this->getHeaders()->shouldBe($expected);
     }
 
+    function it_should_handle_tables_without_headers() {
+      $raw = '<table align-to-level="section" blank-lines-before="1" colsep="1" frame="none" line-rules="hor-ver" rowsep="0" rule-weights="0.0.0.0.4.17" table-template-name="Duty Modification, 7-Column" table-type="exception-quote">
+                <tgroup block-style="1" cols="7" grid-typeface="1.1" rowsep="0" thead-tbody-ldg-size="0.7.9">
+                  <colspec coldef="txt-no-ldr-no-spread" colname="column1" colsep="1" colwidth="8pts" min-data-value="8"/>
+                  <colspec coldef="txt-no-ldr-no-spread" colname="column2" colsep="1" colwidth="66.00pt" min-data-value="33"/>
+                  <colspec coldef="txt" colname="column3" colsep="1" colwidth="402.19pt" min-data-value="60"/>
+                  <colspec coldef="txt-no-ldr-no-spread" colname="column4" colsep="1" colwidth="59.06pt" min-data-value="45"/>
+                  <colspec coldef="txt-no-ldr-no-spread" colname="column5" colsep="1" colwidth="61.88pt" min-data-value="45"/>
+                  <colspec coldef="txt-no-ldr-no-spread" colname="column6" colsep="1" colwidth="57.38pt" min-data-value="45"/>
+                  <colspec coldef="fig" colname="column7" colwidth="8.44pt" min-data-value="2"/>
+                  <tbody>
+                    <row>
+                      <entry align="left" colname="column1" leader-modify="clr-ldr" rowsep="0" stub-definition="txt-clr" stub-hierarchy="1"/>
+                      <entry align="left" colname="column2" leader-modify="clr-ldr" rowsep="0" valign="top">8543.70.94</entry>
+                      <entry align="left" colname="column3" leader-modify="force-ldr-bottom" rowsep="0" valign="bottom">Electronic educational devices designed or intended primarily for children</entry>
+                      <entry align="left" colname="column4" leader-modify="clr-ldr" rowsep="0" valign="bottom">Free</entry>
+                      <entry align="left" colname="column5" leader-modify="clr-ldr" rowsep="0" valign="bottom"/>
+                      <entry align="left" colname="column6" leader-modify="clr-ldr" rowsep="0" valign="bottom">35%</entry>
+                      <entry align="right" colname="column7" leader-modify="clr-ldr" rowsep="0" valign="bottom"/>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </table>';
+
+      $this->simplexml($raw);
+      $this->asMarkdown()->shouldBeString();
+    }
+
     function it_should_parse_entries(){
       $entry = simplexml_load_string('<entry align="right" colname="column4" leader-modify="clr-ldr">$2,948.86<superscript>2</superscript></entry>');
 

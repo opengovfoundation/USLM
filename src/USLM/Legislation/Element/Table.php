@@ -64,6 +64,11 @@ class Table extends Element
     $this->checkRequirements('xml');
 
     $header = $this->xml->tgroup->thead;
+
+    if(!$header){
+      return false;
+    }
+
     $headerRows = $header->row;
     
     if($headerRows > 1){
@@ -91,15 +96,21 @@ class Table extends Element
   */
   public function tableToMarkdown($body, $headers){
     $markdown = "";
-    $columns = count($headers);
+
+    $columns = count($body[0]);
 
     $tableArray = $body;
-    array_push($tableArray, $headers);
+
+    if($headers){
+      array_push($tableArray, $headers);  
+    }
 
     $widths = $this->getColumnWidths($tableArray);
     $totalWidth = $this->getTableWidth($widths, $columns);
 
-    $markdown .= $this->rowToMarkdown($headers, $widths) . "\n";
+    if($headers){
+      $markdown .= $this->rowToMarkdown($headers, $widths) . "\n";  
+    }
 
     $markdown .= str_repeat('-', $totalWidth) . "\n";
 
