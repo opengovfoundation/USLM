@@ -4,6 +4,13 @@ namespace USLM\Legislation\Element;
 
 class Table extends Element
 {
+  /**
+  * getBodyAsMarkdown
+  *   Return table body as markdown
+  *
+  * @param void
+  * @return String
+  */
   public function getBodyAsMarkdown() {
     $this->checkRequirements('xml');
 
@@ -74,6 +81,14 @@ class Table extends Element
     return $headers;
   }
 
+  /**
+  * tableToMarkdown
+  *   return multidimensional table array as markdown string
+  *
+  * @param Array $body
+  * @param Array $headers
+  * @return String
+  */
   public function tableToMarkdown($body, $headers){
     $markdown = "";
     $columns = count($headers);
@@ -122,6 +137,14 @@ class Table extends Element
     return $widths;
   }
 
+  /**
+  * rowToMarkdown
+  *   return table row as markdown string
+  *
+  * @param Array $row
+  * @param Array $widths
+  * @return String
+  */
   public function rowToMarkdown(array $row, array $widths){
     $markdown = "";
     foreach($row as $index => $cell){
@@ -150,6 +173,14 @@ class Table extends Element
     return $content;
   }
 
+  /**
+  * getTableWidth
+  *   return total table width
+  *
+  * @param Array $widths
+  * @param Int $columns
+  * @return Int
+  */
   public function getTableWidth($widths, $columns){
     $contentWidth = array_sum($widths);
     $spacePadding = 2 * $columns;
