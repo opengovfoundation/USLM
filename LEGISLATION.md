@@ -67,6 +67,11 @@ This library can currently grab the following from a House Bill (HR):
 
 > returns array of committee arrays each having keys 'committee-id' and 'committee-name'
 
+**Markdown**
+>getBodyAsMarkdown()
+
+> returns bill body as markdown string
+
 ### Types
 
 * Bills
