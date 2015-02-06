@@ -23,7 +23,8 @@ class Quotedblock extends Element {
 
     $markdown = $this->stripMarkdownStyling($markdown);
     $markdown = $this->addBlockQuoteMarkers($markdown);
-    $markdown .= "\n" . (string)$after;
+    $markdown = "\n" . $markdown . "\n" . (string)$after;
+    //$markdown .= "\n" . (string)$after;
 
     if($this->parent != null){
       $markdown = $this->indent($markdown, 2);

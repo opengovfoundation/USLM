@@ -62,10 +62,12 @@ class ParagraphSpec extends ObjectBehavior
       $expected = "";
       $expected .= "* __(2)__ in subsection (f)—\n";
       $expected .= "  * __(A)__ by striking \"this section, the\" and inserting the following:\n";
+      $expected .= "    \n";
       $expected .= "    > this section:\n";
       $expected .= "    > (1) The\n";
       $expected .= "    ; and\n";
       $expected .= "  * __(B)__ by adding at the end the following new paragraph:\n";
+      $expected .= "    \n";
       $expected .= "    > (2) The term \"veteran\", with respect to inactive duty training described in subsection (a)(1), also includes an individual who—\n";
       $expected .= "    >   (A) is not otherwise eligible for the benefits of this chapter; and\n"; 
       $expected .= "    >   (B) while serving in the reserve components of the Armed Forces, performed such inactive duty training but did not serve on active duty.\n";
@@ -79,6 +81,7 @@ class ParagraphSpec extends ObjectBehavior
     public function getExpected() {
       $expected = "";
       $expected .= "* __(1)__ by amending paragraph (1) to read as follows:\n";
+      $expected .= "  \n";
       $expected .= "  > (1) Charter school\n";
       $expected .= "  >   The term \"charter school\" means a public school that—\n";
       $expected .= "  >   (A) in accordance with a specific State statute authorizing the granting of charters to schools, is exempt from significant State or local rules that inhibit the flexible operation and management of public schools, but not from any rules relating to the other requirements of this paragraph;\n";

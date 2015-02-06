@@ -23,6 +23,7 @@ class QuotedBlockSpec extends ObjectBehavior
                 </quoted-block>';
 
       $expected = "";
+      $expected .= "\n";
       $expected .= "> 5211. Authorization of appropriations\n";
       $expected .= ">   There are authorized to be appropriated to carry out this subpart $300,000,000 for fiscal year 2015 and each of the 5 succeeding fiscal years.\n";
       $expected .= ".";
@@ -45,6 +46,7 @@ class QuotedBlockSpec extends ObjectBehavior
               </quoted-block>';
 
       $expected = "";
+      $expected .= "\n";
       $expected .= "> (g) Public Disclosure of LNG Export Destinations\n";
       $expected .= ">   As a condition for approval of any authorization to export LNG, the Secretary of Energy shall require the applicant to publicly disclose the specific destination or destinations of any such authorized LNG exports.\n";
       $expected .= ".";
@@ -64,6 +66,7 @@ class QuotedBlockSpec extends ObjectBehavior
               </quoted-block>';
 
       $expected = "";
+      $expected .= "\n";
       $expected .= "> (D) that is under the jurisdiction of the Secretary of Defense or the Secretary of a military department;\n";
       $expected .= ".";
 
@@ -85,6 +88,7 @@ class QuotedBlockSpec extends ObjectBehavior
               </quoted-block>';
 
       $expected = "";
+      $expected .= "\n";
       $expected .= "> (ii) any purchase or sale of a nonfinancial commodity or security for deferred shipment or delivery, so long as the transaction is intended to be physically settled, including any stand-alone or embedded option for which exercise results in a physical delivery obligation;\n";
       $expected .= ".";
 
@@ -101,6 +105,7 @@ class QuotedBlockSpec extends ObjectBehavior
               </quoted-block>';
 
       $expected = "";
+      $expected .= "\n";
       $expected .= "> For purposes of this section, the term \"minister of the gospel\" includes any duly recognized official of a religious, spiritual, moral, or ethical organization (whether theistic or not).\n";
       $expected .= ".";
 
@@ -118,6 +123,7 @@ class QuotedBlockSpec extends ObjectBehavior
               </quoted-block>';
 
       $expected = "";
+      $expected .= "\n";
       $expected .= "> 21110. Grade crossing exception.\n";
       $expected .= ".";
 
@@ -137,6 +143,7 @@ class QuotedBlockSpec extends ObjectBehavior
               </quoted-block>';
 
       $expected = "";
+      $expected .= "\n";
       $expected .= "> this section:\n";
       $expected .= "> (1) The\n";
       $expected .= "; and";
@@ -165,6 +172,7 @@ class QuotedBlockSpec extends ObjectBehavior
               </quoted-block>';
 
       $expected = "";
+      $expected .= "\n";
       $expected .= "> • Not later than 180 days after the end of each fiscal year, the Director of the Board of Prisons shall submit to the President and Congress a report with respect to the preceding fiscal year. The report shall contain a detailed summary and analysis of the most recent data regarding the rate at which juveniles are subject to solitary confinement and the trends demonstrated by the data described in the next sentence. The data referred to in the preceding sentence are, for each juvenile who was subject to solitary confinement during the period to which the report pertains, the types of offenses for which the juvenile is incarcerated, the race, gender, and age of the juvenile, how many hours the juvenile was subject to solitary confinement; and the purpose for the solitary confinement.\n";
       $expected .= ".";
 
@@ -199,6 +207,7 @@ class QuotedBlockSpec extends ObjectBehavior
               </quoted-block>';
 
       $expected = "";
+      $expected .= "\n";
       $expected .= "> VIII Ratable inclusion of certain income\n";
       $expected .= "> Sec. 1351A. 15-year ratable inclusion of cancelled student loan debt.\n";
       $expected .= "> 1351A. 15-year ratable inclusion of cancelled student loan debt\n";

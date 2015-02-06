@@ -122,6 +122,7 @@ class LegisbodySpec extends ObjectBehavior
       $expected .= "  * This Act may be cited as the \"Constitution and Citizenship Day Act of 2014\".\n";
       $expected .= "* __2. Constitution Day and civic responsibility system for students__\n";
       $expected .= "  * Part C of title II of the Elementary and Secondary Education Act of 1965 (20 U.S.C. 6601 et seq.) is amended by adding at the end the following new subpart:\n";
+      $expected .= "  \n";
       $expected .= "  > 6 Teaching of the Constitution\n";
       $expected .= "  > 2371. Establishment and operation of Constitution Day Grant Program\n";
       $expected .= "  >   (a) Grant program authorized\n";
